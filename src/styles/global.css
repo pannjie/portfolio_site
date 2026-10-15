@@ -1,3 +1,6 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
 /*
   The CSS in this style tag is based off of Bear Blog's default CSS.
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
@@ -5,6 +8,8 @@
  */
 
 :root {
+	--sidebar-width: 15rem;
+	--sidebar-padding: 20rem;
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
@@ -19,9 +24,9 @@
 body {
 	font-family: var(--font-atkinson);
 	margin: 0;
-	padding: 0;
+	padding: 0 0 0 var(--sidebar-width);
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
+	background: white;
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
@@ -113,9 +118,10 @@ hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
 }
-@media (max-width: 720px) {
+@media (max-width: 760px) {
 	body {
 		font-size: 18px;
+		padding: 4.25rem 0 0;
 	}
 	main {
 		padding: 1em;
