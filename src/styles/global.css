@@ -9,7 +9,7 @@
 
 :root {
 	--sidebar-width: 15rem;
-	--sidebar-left-offset: 5rem;
+	--sidebar-left-offset: 1.6rem;
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
@@ -37,8 +37,16 @@ body {
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	margin: 0 auto;
+	padding: 1.4em 0.6em;
+}
+
+.grid-page main {
+	box-sizing: border-box;
+	width: min(1240px, calc(100vw - (var(--sidebar-width) + var(--sidebar-left-offset)) - 1rem));
+	max-width: 100%;
+	margin: 0;
+	padding: 5.15rem 0.45rem 0.8rem;
 }
 h1,
 h2,
@@ -125,6 +133,10 @@ hr {
 	}
 	main {
 		padding: 1em;
+	}
+	.grid-page main {
+		width: 100%;
+		padding: 0.55rem 0.45rem 0.75rem;
 	}
 }
 

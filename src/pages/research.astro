@@ -1,16 +1,64 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import PentagramGrid from '../components/PentagramGrid.astro';
+import ImageOne from '../assets/blog-placeholder-about.jpg';
+import ImageTwo from '../assets/blog-placeholder-2.jpg';
+import ImageThree from '../assets/blog-placeholder-4.jpg';
+import ImageFour from '../assets/blog-placeholder-1.jpg';
+import ImageFive from '../assets/blog-placeholder-5.jpg';
+import ImageSix from '../assets/blog-placeholder-3.jpg';
+import { SITE_TITLE } from '../consts';
+
+const researchProjects = [
+	{
+		title: 'Material Histories Atlas',
+		description: 'A comparative visual archive connecting product lifecycles and climate signals.',
+		href: '/bio/',
+		image: ImageOne,
+	},
+	{
+		title: 'Behavioral Interface Study',
+		description: 'Interaction experiments on motion cues and trust in complex interfaces.',
+		href: '/about/',
+		image: ImageTwo,
+	},
+	{
+		title: 'Neighborhood Sensing Pilot',
+		description: 'Spatial monitoring project mapping local environmental and mobility patterns.',
+		href: '/blog/using-mdx/',
+		image: ImageThree,
+	},
+	{
+		title: 'Narrative Annotation Framework',
+		description: 'A method for turning qualitative interviews into visual storytelling systems.',
+		href: '/blog/markdown-style-guide/',
+		image: ImageFour,
+	},
+	{
+		title: 'Realtime Signals Prototype',
+		description: 'Prototype dashboard combining event streams and editorial decision support.',
+		href: '/research/',
+		image: ImageFive,
+	},
+	{
+		title: 'Publication Pattern Index',
+		description: 'Cross-publication analysis of graphic language in long-form visual journalism.',
+		href: '/cv/',
+		image: ImageSix,
+	},
+];
 ---
 
-<Layout
-	title="Research"
-	description="Research notes, methods, and references."
-	pubDate={new Date('October 15 2026')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		This page is for your research work, process notes, and project methodologies. Replace this
-		with your own content, links, and downloadable resources.
-	</p>
-</Layout>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Research | ${SITE_TITLE}`} description="Research projects and methods." />
+	</head>
+	<body class="grid-page">
+		<Header />
+		<main>
+			<PentagramGrid items={researchProjects} />
+		</main>
+	</body>
+</html>
