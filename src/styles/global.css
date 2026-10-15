@@ -9,7 +9,7 @@
 
 :root {
 	--sidebar-width: 15rem;
-	--sidebar-padding: 20rem;
+	--sidebar-left-offset: 5rem;
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
@@ -24,7 +24,7 @@
 body {
 	font-family: var(--font-atkinson);
 	margin: 0;
-	padding: 0 0 0 var(--sidebar-width);
+	padding: 0 0 0 calc(var(--sidebar-width) + var(--sidebar-left-offset));
 	text-align: left;
 	background: white;
 	background-size: 100% 600px;

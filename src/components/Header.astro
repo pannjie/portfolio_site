@@ -21,11 +21,30 @@ import HeaderLink from './HeaderLink.astro';
 		</button>
 		<div class="nav-content" id="primary-navigation">
 			<div class="internal-links">
-				<HeaderLink href="/">Stories</HeaderLink>
-				<HeaderLink href="/blog">Interactives</HeaderLink>
-				<HeaderLink href="/about">Past Lives</HeaderLink>
-				<HeaderLink href="/about">CV</HeaderLink>
-				<HeaderLink href="/about">Bio</HeaderLink>
+				<HeaderLink href="/">
+					<span class="link-label">Stories</span>
+					<span class="link-underline" aria-hidden="true"></span>
+				</HeaderLink>
+				<HeaderLink href="/blog">
+					<span class="link-label">Interactives</span>
+					<span class="link-underline" aria-hidden="true"></span>
+				</HeaderLink>
+				<HeaderLink href="/about">
+					<span class="link-label">Past Lives</span>
+					<span class="link-underline" aria-hidden="true"></span>
+				</HeaderLink>
+				<HeaderLink href="/research">
+					<span class="link-label">Research</span>
+					<span class="link-underline" aria-hidden="true"></span>
+				</HeaderLink>
+				<HeaderLink href="/cv">
+					<span class="link-label">CV</span>
+					<span class="link-underline" aria-hidden="true"></span>
+				</HeaderLink>
+				<HeaderLink href="/bio">
+					<span class="link-label">Bio</span>
+					<span class="link-underline" aria-hidden="true"></span>
+				</HeaderLink>
 			</div>
 		</div>
 	</nav>
@@ -33,7 +52,7 @@ import HeaderLink from './HeaderLink.astro';
 <style>
 	.site-header {
 		position: fixed;
-		inset: 3rem auto 0 5rem;
+		inset: 3rem auto 0 var(--sidebar-left-offset);
 		z-index: 20;
 		box-sizing: border-box;
 		width: var(--sidebar-width);
@@ -74,6 +93,14 @@ import HeaderLink from './HeaderLink.astro';
 	.internal-links {
 		gap: 0.25rem;
 	}
+	.internal-links a {
+		position: relative;
+		display: inline-flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		width: fit-content;
+	}
 	nav a {
 		padding: 0.1rem 0;
 		color: rgb(var(--gray));
@@ -88,6 +115,17 @@ import HeaderLink from './HeaderLink.astro';
 		color: rgb(var(--gray-dark));
 		font-weight: 800;
 		text-decoration: none;
+	}
+	.link-label {
+		display: inline-block;
+	}
+	.link-underline {
+		display: block;
+		width: 100%;
+		margin-top: 0.2rem;
+		border-top: 2px solid currentColor;
+		transform: scaleX(0);
+		transform-origin: right center;
 	}
 	.social-links,
 	.social-links a {
@@ -148,6 +186,9 @@ import HeaderLink from './HeaderLink.astro';
 			align-items: center;
 			gap: 1.25rem;
 		}
+		.site-header.is-open .internal-links a {
+			align-items: center;
+		}
 		.site-header.is-open nav a {
 			font-size: 1rem;
 		}
@@ -156,10 +197,50 @@ import HeaderLink from './HeaderLink.astro';
 		}
 	}
 </style>
-<script>
+<script type="module">
+	import { gsap } from 'gsap';
+
 	const header = document.querySelector('.site-header');
 	const menuToggle = header?.querySelector('.menu-toggle');
 	const navigation = header?.querySelector('#primary-navigation');
+	const sidebarLinks = navigation?.querySelectorAll('.internal-links > a') ?? [];
+
+	sidebarLinks.forEach((link) => {
+		const underline = link.querySelector('.link-underline');
+		if (!underline) return;
+
+		const isActive = link.classList.contains('active');
+		gsap.set(underline, {
+			scaleX: isActive ? 1 : 0,
+			transformOrigin: isActive ? 'left center' : 'right center',
+		});
+
+		const showUnderline = () => {
+			gsap.to(underline, {
+				scaleX: 1,
+				transformOrigin: 'left center',
+				duration: 0.24,
+				ease: 'power2.out',
+				overwrite: 'auto',
+			});
+		};
+
+		const hideUnderline = () => {
+			if (link.classList.contains('active')) return;
+			gsap.to(underline, {
+				scaleX: 0,
+				transformOrigin: 'right center',
+				duration: 0.2,
+				ease: 'power2.in',
+				overwrite: 'auto',
+			});
+		};
+
+		link.addEventListener('mouseenter', showUnderline);
+		link.addEventListener('mouseleave', hideUnderline);
+		link.addEventListener('focus', showUnderline);
+		link.addEventListener('blur', hideUnderline);
+	});
 
 	function closeMenu() {
 		header?.classList.remove('is-open');
