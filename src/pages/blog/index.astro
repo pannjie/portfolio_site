@@ -3,18 +3,32 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import PentagramGrid from '../../components/PentagramGrid.astro';
-import FallbackImage from '../../assets/blog-placeholder-about.jpg';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const interactives = posts.map((post) => ({
-	title: post.data.title,
-	description: post.data.description,
+const interactiveTitles = [
+	'Lorem ipsum dolor sit amet',
+	'Consectetur adipiscing elit',
+	'Sed do eiusmod tempor',
+	'Ut enim ad minim veniam',
+	'Quis nostrud exercitation',
+];
+
+const interactiveDescriptions = [
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+	'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
+	'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
+	'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.',
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+];
+
+const interactives = posts.map((post, index) => ({
+	title: interactiveTitles[index % interactiveTitles.length],
+	description: interactiveDescriptions[index % interactiveDescriptions.length],
 	href: `/blog/${post.id}/`,
-	image: post.data.heroImage ?? FallbackImage,
 }));
 ---
 

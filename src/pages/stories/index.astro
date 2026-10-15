@@ -1,0 +1,52 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import PentagramGrid from '../../components/PentagramGrid.astro';
+import { SITE_TITLE } from '../../consts';
+
+const stories = [
+	{
+		title: 'Chronicle of a War Foretold',
+		description: 'Investigative long-form visual story on prediction markets and conflict timing.',
+		href: '/stories/chronicle/',
+	},
+	{
+		title: 'Lorem ipsum dolor sit amet',
+		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+		href: '/blog/second-post/',
+	},
+	{
+		title: 'Consectetur adipiscing elit',
+		description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
+		href: '/blog/third-post/',
+	},
+	{
+		title: 'Sed do eiusmod tempor',
+		description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
+		href: '/about/',
+	},
+	{
+		title: 'Ut labore et dolore',
+		description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.',
+		href: '/research/',
+	},
+	{
+		title: 'Magna aliqua enim ad',
+		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+		href: '/bio/',
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Stories | ${SITE_TITLE}`} description="Stories." />
+	</head>
+	<body class="grid-page">
+		<Header />
+		<main>
+			<PentagramGrid items={stories} />
+		</main>
+	</body>
+</html>

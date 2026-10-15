@@ -7,7 +7,53 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+@font-face {
+	font-family: 'VT323';
+	src: url('/fonts/vt323-latin-400-normal.woff2') format('woff2'),
+		url('/fonts/vt323-latin-400-normal.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Host Grotesk';
+	src: url('/fonts/host-grotesk-latin-300-normal.woff2') format('woff2'),
+		url('/fonts/host-grotesk-latin-300-normal.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Host Grotesk';
+	src: url('/fonts/host-grotesk-latin-400-normal.woff2') format('woff2'),
+		url('/fonts/host-grotesk-latin-400-normal.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Host Grotesk';
+	src: url('/fonts/host-grotesk-latin-500-normal.woff2') format('woff2'),
+		url('/fonts/host-grotesk-latin-500-normal.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Host Grotesk';
+	src: url('/fonts/host-grotesk-latin-600-normal.woff2') format('woff2'),
+		url('/fonts/host-grotesk-latin-600-normal.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
 :root {
+	--font-host-grotesk: 'Host Grotesk', 'Atkinson', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	--sidebar-width: 15rem;
 	--sidebar-left-offset: 1.6rem;
 	--accent: #2337ff;
@@ -22,7 +68,8 @@
 		0 16px 32px rgba(var(--gray), 33%);
 }
 body {
-	font-family: var(--font-atkinson);
+	font-family: var(--font-host-grotesk);
+	font-weight: 400;
 	margin: 0;
 	padding: 0 0 0 calc(var(--sidebar-width) + var(--sidebar-left-offset));
 	text-align: left;
@@ -57,6 +104,7 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+	font-weight: 400;
 }
 h1 {
 	font-size: 3.052em;
@@ -75,7 +123,7 @@ h5 {
 }
 strong,
 b {
-	font-weight: 700;
+	font-weight: 600;
 }
 a {
 	color: var(--accent);
@@ -126,6 +174,136 @@ hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
 }
+
+.pentagram-grid {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	overflow-x: clip;
+}
+
+.pentagram-grid .grid-list {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.4rem;
+}
+
+.pentagram-grid .grid-item {
+	min-width: 0;
+}
+
+.pentagram-grid .project-card {
+	display: grid;
+	grid-template-rows: auto auto 1fr;
+	color: inherit;
+	text-decoration: none;
+	background-image: none;
+	min-height: 100%;
+	padding-left: 0.6rem;
+	border-left: 1px solid rgba(var(--gray-dark), 0.35);
+}
+
+.pentagram-grid .card-topline {
+	height: 1.9rem;
+	display: flex;
+	align-items: center;
+}
+
+.pentagram-grid .card-label {
+	display: inline-flex;
+	align-items: center;
+	max-width: 100%;
+	height: 1.1rem;
+	padding: 0 0.2rem;
+	background: rgb(var(--gray-dark));
+	color: #fff;
+	font-family: 'VT323', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	font-size: 1rem;
+	font-weight: 400;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	line-height: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.pentagram-grid .project-media {
+	position: relative;
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	background: linear-gradient(135deg, #e6e6e6 0%, #f7f7f7 100%);
+	margin-top: 0.2rem;
+	max-width: 100%;
+}
+
+.pentagram-grid .gradient-1 {
+	background: linear-gradient(135deg, #dfe7ef 0%, #f9fbfd 100%);
+}
+
+.pentagram-grid .gradient-2 {
+	background: linear-gradient(135deg, #e8e2d8 0%, #faf7f2 100%);
+}
+
+.pentagram-grid .gradient-3 {
+	background: linear-gradient(135deg, #e0e8dc 0%, #f7fbf6 100%);
+}
+
+.pentagram-grid .gradient-4 {
+	background: linear-gradient(135deg, #e9deeb 0%, #faf7fb 100%);
+}
+
+.pentagram-grid .gradient-5 {
+	background: linear-gradient(135deg, #e6e1d7 0%, #fbf9f4 100%);
+}
+
+.pentagram-grid .gradient-6 {
+	background: linear-gradient(135deg, #dce7e8 0%, #f6fbfc 100%);
+}
+
+.pentagram-grid .project-hover {
+	position: absolute;
+	inset: 0;
+	border: 2px solid #111;
+	box-sizing: border-box;
+	pointer-events: none;
+	opacity: 0;
+}
+
+.pentagram-grid .project-copy {
+	padding: 0.72rem 0.06rem 0.45rem;
+	margin-top: 0.52rem;
+}
+
+.pentagram-grid h2 {
+	margin: 0;
+	font-size: clamp(1.04rem, 1.2vw, 1.36rem);
+	line-height: 1.15;
+	letter-spacing: 0.01em;
+	text-wrap: balance;
+}
+
+.pentagram-grid p {
+	margin-top: 0.3rem;
+	margin-bottom: 0;
+	font-size: clamp(0.82rem, 0.92vw, 0.98rem);
+	line-height: 1.33;
+	letter-spacing: 0.01em;
+	color: rgb(var(--gray-dark));
+	opacity: 0.87;
+}
+
+@media (max-width: 1080px) {
+	.pentagram-grid .grid-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.12rem;
+	}
+
+	.pentagram-grid .project-copy {
+		padding: 0.66rem 0.04rem 0.42rem;
+	}
+}
 @media (max-width: 760px) {
 	body {
 		font-size: 18px;
@@ -137,6 +315,18 @@ hr {
 	.grid-page main {
 		width: 100%;
 		padding: 0.55rem 0.45rem 0.75rem;
+	}
+	.pentagram-grid .grid-list {
+		grid-template-columns: 1fr;
+		gap: 0.95rem;
+	}
+
+	.pentagram-grid .card-topline {
+		height: 1.75rem;
+	}
+
+	.pentagram-grid .project-copy {
+		padding: 0.62rem 0.03rem 0.34rem;
 	}
 }
 
