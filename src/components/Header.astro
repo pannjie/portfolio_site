@@ -2,51 +2,24 @@
 import HeaderLink from './HeaderLink.astro';
 ---
 
-	<header class="site-header">
-	<nav>
-		<h2>
-			<a href="/">PJ</a>
-		</h2>
-		<button
-			class="menu-toggle"
-			type="button"
-			aria-label="Open navigation menu"
-			aria-expanded="false"
-			aria-controls="primary-navigation"
-		>
-			<span></span>
-			<span></span>
-			<span></span>
-		</button>
-		<div class="nav-content" id="primary-navigation">
-			<div class="internal-links">
-				<HeaderLink href="/stories">
-					<span class="link-label">Stories</span>
-					<span class="link-underline" aria-hidden="true"></span>
-				</HeaderLink>
-				<HeaderLink href="/interactive">
-					<span class="link-label">Interactive</span>
-					<span class="link-underline" aria-hidden="true"></span>
-				</HeaderLink>
-				<HeaderLink href="/research">
-					<span class="link-label">Research</span>
-					<span class="link-underline" aria-hidden="true"></span>
-				</HeaderLink>
-				<HeaderLink href="/about">
-					<span class="link-label">Past Lives</span>
-					<span class="link-underline" aria-hidden="true"></span>
-				</HeaderLink>
-			
-				<HeaderLink href="/cv">
-					<span class="link-label">CV</span>
-					<span class="link-underline" aria-hidden="true"></span>
-				</HeaderLink>
-				<HeaderLink href="/bio">
-					<span class="link-label">Bio</span>
-					<span class="link-underline" aria-hidden="true"></span>
-				</HeaderLink>
-			</div>
-		</div>
+<header class="site-header">
+	<nav aria-label="Primary">
+		<h2><a href="/">PJ</a></h2>
+		<ul class="tree-view site-tree" role="tree" aria-label="Site pages">
+			<li>
+				<details open>
+					<summary>Pages</summary>
+					<ul>
+						<li><HeaderLink href="/stories">Stories</HeaderLink></li>
+						<li><HeaderLink href="/interactive">Interactive</HeaderLink></li>
+						<li><HeaderLink href="/research">Research</HeaderLink></li>
+						<li><HeaderLink href="/about">Past Lives</HeaderLink></li>
+						<li><HeaderLink href="/cv">CV</HeaderLink></li>
+						<li><HeaderLink href="/bio">Bio</HeaderLink></li>
+					</ul>
+				</details>
+			</li>
+		</ul>
 	</nav>
 </header>
 <style>
@@ -61,7 +34,8 @@ import HeaderLink from './HeaderLink.astro';
 		font-family: 'Host Grotesk', 'Atkinson', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 		font-weight: 400;
 	}
-	h2 {
+
+	.site-header h2 {
 		margin: 0;
 		max-width: 7rem;
 		font-size: 0.8rem;
@@ -70,87 +44,137 @@ import HeaderLink from './HeaderLink.astro';
 		line-height: 1.65;
 		text-transform: uppercase;
 	}
-	h2 a,
-	h2 a.active {
+
+	.site-header h2 a,
+	.site-header h2 a:hover,
+	.site-header h2 a.active {
+		color: inherit;
 		text-decoration: none;
 	}
-	nav {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		gap: 1rem;
-	}
-	h2::after {
+
+	.site-header h2::after {
 		display: block;
 		width: 100%;
 		margin-top: 0.75rem;
 		border-bottom: 2px solid currentColor;
 		content: '';
 	}
-	.nav-content,
-	.internal-links {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-	}
-	.internal-links {
-		gap: 0.25rem;
-	}
-	.internal-links a {
-		position: relative;
-		display: inline-flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: flex-start;
-		width: fit-content;
-		padding: 0.12rem 0.3rem;
-		overflow: hidden;
-	}
-	nav a {
-		padding: 0;
-		color: rgb(var(--gray));
-		font-size: 0.8rem;
-		font-weight: 400;
-		letter-spacing: 0.14em;
-		line-height: 1.5;
-		text-transform: uppercase;
-		text-decoration: none;
-	}
-	nav a.active {
-		color: rgb(var(--gray-dark));
-		font-weight: 500;
-		text-decoration: none;
-	}
-	.link-label {
-		display: inline-block;
-		position: relative;
-		z-index: 1;
-		transition: color 0.2s ease;
-	}
-	.link-underline {
-		position: absolute;
-		z-index: 0;
-		inset: 0;
+
+	/*
+	  Tree view adapted from 98.css v0.1.21 (only the rules this sidebar uses).
+	  https://github.com/jdan/98.css
+	  License MIT: https://github.com/jdan/98.css/blob/main/LICENSE
+	 */
+	.site-tree {
 		display: block;
-		width: 100%;
-		margin-top: 0;
-		background: #111;
-		transform: scaleX(0);
-		transform-origin: right center;
-		pointer-events: none;
+		margin: 0;
+		padding: 0.42rem 0.2rem 0;
+		font-family: 'VT323', 'Lucida Console', monospace;
+		font-size: 1.06rem;
+		line-height: 1.2;
+		-webkit-font-smoothing: none;
 	}
-	.internal-links a:hover .link-label,
-	.internal-links a:focus-visible .link-label,
-	.internal-links a.active .link-label {
+
+	.site-tree li {
+		margin: 0.12rem 0;
+		list-style-type: none;
+	}
+
+	.site-tree ul {
+		margin-top: 3px;
+		margin-left: 16px;
+		padding-left: 16px;
+		border-left: 1px dotted grey;
+	}
+
+	/* Dotted connector from the vertical guide to each item */
+	.site-tree ul > li {
+		position: relative;
+	}
+
+	.site-tree ul > li::before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 6px;
+		left: -16px;
+		width: 12px;
+		border-bottom: 1px dotted grey;
+	}
+
+	/* Hide the vertical guide below the last item */
+	.site-tree ul > li:last-child::after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 7px;
+		bottom: 0;
+		left: -20px;
+		width: 8px;
+		background: #fff;
+	}
+
+	.site-tree details {
+		margin-top: 0;
+	}
+
+	.site-tree summary {
+		display: flex;
+		align-items: center;
+		margin-bottom: 0;
+		cursor: pointer;
+		font-weight: 700;
+	}
+
+	.site-tree summary::marker,
+	.site-tree summary::-webkit-details-marker {
+		content: '';
+	}
+
+	.site-tree summary:focus {
+		outline: 1px dotted #000;
+	}
+
+	/* Expand/collapse box, centred against the VT323 label */
+	.site-tree summary::before {
+		content: '+';
+		flex: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 9px;
+		height: 9px;
+		margin-right: 5px;
+		border: 1px solid grey;
+		background-color: #fff;
+		font-family: monospace;
+		font-size: 11px;
+		line-height: 1;
+	}
+
+	.site-tree details[open] > summary::before {
+		content: '-';
+	}
+
+	.site-tree a {
+		display: inline-block;
+		color: #000;
+		text-decoration: none;
+		padding: 0 0.2rem;
+	}
+
+	.site-tree a:focus {
+		outline: none;
+	}
+
+	/* GSAP animates hover/focus once ready; plain CSS is the no-JS fallback */
+	.site-tree:not([data-gsap-ready]) a:hover,
+	.site-tree:not([data-gsap-ready]) a:focus,
+	.site-tree a.active {
+		background: #000;
 		color: #fff;
 	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	.menu-toggle {
-		display: none;
-	}
+
 	@media (max-width: 760px) {
 		.site-header {
 			inset: 0 0 auto;
@@ -158,121 +182,53 @@ import HeaderLink from './HeaderLink.astro';
 			padding: 0.75rem 1.25rem;
 			box-shadow: 0 2px 8px rgba(var(--black), 5%);
 		}
-		nav {
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-			gap: 1rem;
+
+		.site-tree {
+			padding-top: 0.2rem;
 		}
-		h2 {
-			max-width: 11rem;
-		}
-		h2::after {
-			display: none;
-		}
-		.menu-toggle {
-			display: flex;
-			width: 2.75rem;
-			height: 2.75rem;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			gap: 0.35rem;
-			border: 0;
-			background: transparent;
-			cursor: pointer;
-		}
-		.menu-toggle span {
-			display: block;
-			width: 1.4rem;
-			border-top: 2px solid currentColor;
-		}
-		.nav-content {
-			display: none;
-		}
-		.site-header.is-open .nav-content {
-			position: fixed;
-			inset: 4.25rem 0 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 2rem;
-			background: #fff;
-		}
-		.site-header.is-open .internal-links {
-			align-items: center;
-			gap: 1.25rem;
-		}
-		.site-header.is-open .internal-links a {
-			align-items: center;
-		}
-		.site-header.is-open nav a {
-			font-size: 1rem;
-		}
-		.social-links {
+
+		.site-header h2::after {
 			display: none;
 		}
 	}
 </style>
+
 <script type="module">
 	import { gsap } from 'gsap';
 
-	const header = document.querySelector('.site-header');
-	const menuToggle = header?.querySelector('.menu-toggle');
-	const navigation = header?.querySelector('#primary-navigation');
-	const sidebarLinks = navigation?.querySelectorAll('.internal-links > a') ?? [];
+	const tree = document.querySelector('.site-tree');
 
-	sidebarLinks.forEach((link) => {
-		const underline = link.querySelector('.link-underline');
-		if (!underline) return;
+	if (tree && tree.dataset.gsapReady !== 'true') {
+		tree.dataset.gsapReady = 'true';
 
-		const isActive = link.classList.contains('active');
-		gsap.set(underline, {
-			scaleX: isActive ? 1 : 0,
-			transformOrigin: isActive ? 'left center' : 'right center',
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		tree.querySelectorAll('a:not(.active)').forEach((link) => {
+			const enter = () => {
+				gsap.to(link, {
+					backgroundColor: '#000',
+					color: '#fff',
+					duration: reduceMotion ? 0 : 0.18,
+					ease: 'power2.out',
+					overwrite: 'auto',
+				});
+			};
+
+			const leave = () => {
+				if (document.activeElement === link || link.matches(':hover')) return;
+				gsap.to(link, {
+					backgroundColor: 'rgba(0, 0, 0, 0)',
+					color: '#000',
+					duration: reduceMotion ? 0 : 0.16,
+					ease: 'power2.in',
+					overwrite: 'auto',
+				});
+			};
+
+			link.addEventListener('mouseenter', enter);
+			link.addEventListener('mouseleave', leave);
+			link.addEventListener('focus', enter);
+			link.addEventListener('blur', leave);
 		});
-
-		const showUnderline = () => {
-			gsap.to(underline, {
-				scaleX: 1,
-				transformOrigin: 'left center',
-				duration: 0.24,
-				ease: 'power2.out',
-				overwrite: 'auto',
-			});
-		};
-
-		const hideUnderline = () => {
-			if (link.classList.contains('active')) return;
-			gsap.to(underline, {
-				scaleX: 0,
-				transformOrigin: 'right center',
-				duration: 0.2,
-				ease: 'power2.in',
-				overwrite: 'auto',
-			});
-		};
-
-		link.addEventListener('mouseenter', showUnderline);
-		link.addEventListener('mouseleave', hideUnderline);
-		link.addEventListener('focus', showUnderline);
-		link.addEventListener('blur', hideUnderline);
-	});
-
-	function closeMenu() {
-		header?.classList.remove('is-open');
-		menuToggle?.setAttribute('aria-expanded', 'false');
-		menuToggle?.setAttribute('aria-label', 'Open navigation menu');
 	}
-
-	menuToggle?.addEventListener('click', () => {
-		const isOpen = header?.classList.toggle('is-open') ?? false;
-		menuToggle.setAttribute('aria-expanded', String(isOpen));
-		menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-	});
-
-	navigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
-	document.addEventListener('keydown', (event) => {
-		if (event.key === 'Escape') closeMenu();
-	});
 </script>
