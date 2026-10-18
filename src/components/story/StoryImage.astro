@@ -20,6 +20,7 @@ const { src, alt, crop = true, contain = false } = Astro.props;
 	widths={[480, 960, 1440, 1920].filter((w) => w <= src.width)}
 	sizes="(max-width: 760px) 100vw, 960px"
 	class:list={['story-image', { 'story-image--crop': crop && !contain, 'story-image--contain': contain }]}
+	style={`--aspect: ${(src.width / src.height).toFixed(4)}`}
 />
 
 <style>

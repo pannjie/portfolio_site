@@ -6,8 +6,14 @@
 <div class="chart-note"><slot /></div>
 
 <style>
+	/* Fill the grid cell and centre the text in the area the neighbouring charts draw in:
+	   the top padding matches their label box (1.05rem × 1.2 line + 0.1rem padding) plus the 0.5rem gap. */
 	.chart-note {
-		align-self: end;
+		align-self: stretch;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: calc(1.36rem + 0.5rem) 1.5rem 0;
 		color: rgb(var(--gray));
 		font-size: 0.85rem;
 		line-height: 1.4;
@@ -15,5 +21,11 @@
 
 	.chart-note :global(p) {
 		margin: 0;
+	}
+
+	@media (max-width: 760px) {
+		.chart-note {
+			padding: 0;
+		}
 	}
 </style>

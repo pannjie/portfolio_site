@@ -2,8 +2,9 @@
 interface Props {
 	/** wide: charts and map; medium: photos; column: same width as the text */
 	size?: 'wide' | 'medium' | 'column';
-	/** single: one item; pair: two side by side; trio: grid of up to three per row */
-	layout?: 'single' | 'pair' | 'trio';
+	/** single: one item; pair: two side by side; trio: grid of up to three per row;
+	    gallery: photos in a justified row, all the same height without cropping */
+	layout?: 'single' | 'pair' | 'trio' | 'gallery';
 	title?: string;
 	dek?: string;
 	caption?: string;
@@ -53,6 +54,19 @@ const { size = 'medium', layout = 'single', title, dek, caption } = Astro.props;
 		gap: 1rem;
 	}
 
+	/* Each photo grows in proportion to its aspect ratio, so every photo in the row ends up the same height */
+	.figure-body--gallery {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.figure-body--gallery > :global(img) {
+		flex: var(--aspect, 1) 1 0%;
+		min-width: 0;
+		max-height: none;
+		object-fit: fill;
+	}
+
 	.figure-body--trio {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -76,6 +90,14 @@ const { size = 'medium', layout = 'single', title, dek, caption } = Astro.props;
 		.figure-body--pair,
 		.figure-body--trio {
 			grid-template-columns: 1fr;
+		}
+
+		.figure-body--gallery {
+			flex-direction: column;
+		}
+
+		.figure-body--gallery > :global(img) {
+			flex: none;
 		}
 	}
 </style>
