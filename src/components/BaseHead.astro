@@ -16,6 +16,28 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
+// Self-hosted fonts in public/fonts. Declared here rather than in global.css so the URLs
+// get the base path (/portfolio_site) in dev as well as in the production build.
+const fontFaces = [
+	['VT323', 'vt323-latin-400-normal', 400, 'normal'],
+	['Host Grotesk', 'host-grotesk-latin-300-normal', 300, 'normal'],
+	['Host Grotesk', 'host-grotesk-latin-400-normal', 400, 'normal'],
+	['Host Grotesk', 'host-grotesk-latin-400-italic', 400, 'italic'],
+	['Host Grotesk', 'host-grotesk-latin-500-normal', 500, 'normal'],
+	['Host Grotesk', 'host-grotesk-latin-600-normal', 600, 'normal'],
+]
+	.map(
+		([family, file, weight, style]) => `@font-face {
+	font-family: '${family}';
+	src: url('${withBase(`/fonts/${file}.woff2`)}') format('woff2'),
+		url('${withBase(`/fonts/${file}.woff`)}') format('woff');
+	font-weight: ${weight};
+	font-style: ${style};
+	font-display: swap;
+}`
+	)
+	.join('\n');
 ---
 
 <!-- Global Metadata -->
@@ -25,6 +47,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <link rel="preload" href={withBase("/fonts/vt323-latin-400-normal.woff2")} as="font" type="font/woff2" crossorigin />
 <link rel="preload" href={withBase("/fonts/host-grotesk-latin-500-normal.woff2")} as="font" type="font/woff2" crossorigin />
 <link rel="preload" href={withBase("/fonts/host-grotesk-latin-400-normal.woff2")} as="font" type="font/woff2" crossorigin />
+<style is:inline set:html={fontFaces}></style>
 <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
 <link rel="icon" href={withBase("/favicon.ico")} />
 <link rel="sitemap" href={withBase("/sitemap-index.xml")} />
