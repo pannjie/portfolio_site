@@ -1,0 +1,33 @@
+---
+// A hosted chart (Datawrapper, Infogram…) in an iframe that loads only when scrolled near.
+// Datawrapper iframes report their real height via postMessage; the script below applies it.
+interface Props {
+	src: string;
+	title: string;
+	/** Starting height in px; Datawrapper charts then resize to fit */
+	height: number;
+}
+
+const { src, title, height } = Astro.props;
+---
+
+<iframe class="embed" src={src} title={title} height={height} loading="lazy" scrolling="no" frameborder="0"></iframe>
+
+<style>
+	.embed {
+		display: block;
+		width: 100%;
+		border: 0;
+	}
+</style>
+
+<script>
+	window.addEventListener('message', (event) => {
+		const heights = event.data?.['datawrapper-height'];
+		if (!heights) return;
+		for (const frame of document.querySelectorAll<HTMLIFrameElement>('iframe.embed')) {
+			if (frame.contentWindow !== event.source) continue;
+			for (const height of Object.values(heights)) frame.style.height = `${height}px`;
+		}
+	});
+</script>

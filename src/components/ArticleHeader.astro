@@ -5,7 +5,8 @@ interface Props {
 	/** Optional filled box above the title */
 	label?: string;
 	title: string;
-	pubDate: Date;
+	/** Optional: the date box is left out without it */
+	pubDate?: Date;
 	updatedDate?: Date;
 	/** Optional author box shown beside the date box */
 	byline?: string;
@@ -18,12 +19,24 @@ const { label, title, pubDate, updatedDate, byline } = Astro.props;
 <header class="article-header">
 	{label && <span class="tag tag-filled">{label}</span>}
 	<h1>{title}</h1>
-	<div class="tag-row">
-		{byline && <span class="tag tag-outline">{byline}</span>}
-		<span class="tag tag-outline">
-			{updatedDate ? <>Updated <FormattedDate date={updatedDate} /></> : <FormattedDate date={pubDate} />}
-		</span>
-	</div>
+	{
+		(byline || pubDate || updatedDate) && (
+			<div class="tag-row">
+				{byline && <span class="tag tag-outline">{byline}</span>}
+				{updatedDate ? (
+					<span class="tag tag-outline">
+						Updated <FormattedDate date={updatedDate} />
+					</span>
+				) : (
+					pubDate && (
+						<span class="tag tag-outline">
+							<FormattedDate date={pubDate} />
+						</span>
+					)
+				)}
+			</div>
+		)
+	}
 </header>
 
 <style>

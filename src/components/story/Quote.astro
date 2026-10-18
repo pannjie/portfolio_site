@@ -1,0 +1,59 @@
+---
+// A quoted post (e.g. a tweet) rendered as plain text instead of a third-party embed
+interface Props {
+	author: string;
+	handle?: string;
+	date: string;
+	href: string;
+}
+
+const { author, handle, date, href } = Astro.props;
+---
+
+<blockquote class="quote">
+	<div class="quote-text"><slot /></div>
+	<footer>
+		<span class="quote-author">{author}</span>
+		{handle && <span class="quote-handle">{handle}</span>}
+		<a href={href}>{date}</a>
+	</footer>
+</blockquote>
+
+<style>
+	.quote {
+		margin: 0;
+		padding: 1rem 1.2rem;
+		border: 1px solid rgb(var(--gray-dark));
+		background: #fff;
+		font-size: 1.05rem;
+		line-height: 1.45;
+	}
+
+	.quote-text :global(p) {
+		margin: 0 0 0.8rem;
+	}
+
+	footer {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.2rem 0.6rem;
+		align-items: baseline;
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+	}
+
+	.quote-author {
+		color: rgb(var(--gray-dark));
+		font-weight: 500;
+	}
+
+	.quote-handle,
+	footer a {
+		font-family: 'VT323', 'Lucida Console', monospace;
+		font-size: 1rem;
+	}
+
+	footer a {
+		color: inherit;
+	}
+</style>

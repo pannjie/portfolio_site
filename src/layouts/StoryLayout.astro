@@ -5,6 +5,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import StoryImage from '../components/story/StoryImage.astro';
 import { SITE_TITLE } from '../consts';
+import { getImage } from 'astro:assets';
+import { withBase } from '../utils/withBase';
 
 // Props come from the MDX page's frontmatter
 interface Props {
@@ -13,7 +15,8 @@ interface Props {
 		/** Optional filled box above the title */
 		label?: string;
 		byline: string;
-		pubDate: string;
+		/** Optional publication date, e.g. 2026-01-10 */
+		pubDate?: string;
 		/** For search results and link previews; not shown on the page */
 		description: string;
 		/** Optional italic intro line above the first paragraph */
@@ -21,10 +24,13 @@ interface Props {
 		/** Optional image above the title, as a path inside src/assets/stories/ */
 		hero?: string;
 		heroAlt?: string;
+		/** Optional looping video above the title instead of the image: a name in public/media/stories/
+		    with .webm and .mp4 versions. `hero` then becomes its poster frame. */
+		heroVideo?: string;
 	};
 }
 
-const { title, label, byline, pubDate, description, subtitle, hero, heroAlt = '' } = Astro.props.frontmatter;
+const { title, label, byline, pubDate, description, subtitle, hero, heroAlt = '', heroVideo } = Astro.props.frontmatter;
 
 // Frontmatter can't import images, so look the hero up by its path
 const storyImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/stories/**/*.{jpg,jpeg,png,webp}', {
@@ -32,6 +38,7 @@ const storyImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/st
 });
 const heroImage = hero ? storyImages[`/src/assets/stories/${hero}`]?.default : undefined;
 if (hero && !heroImage) throw new Error(`Story hero image not found: src/assets/stories/${hero}`);
+const heroPoster = heroVideo && heroImage ? await getImage({ src: heroImage, width: 1600, format: 'webp' }) : undefined;
 ---
 
 <!doctype html>
@@ -45,13 +52,22 @@ if (hero && !heroImage) throw new Error(`Story hero image not found: src/assets/
 		<main>
 			<article class="story">
 				{
-					heroImage && (
+					heroVideo ? (
 						<div class="story-hero">
-							<StoryImage src={heroImage} alt={heroAlt} />
+							<video class="story-hero-video" autoplay muted loop playsinline poster={heroPoster?.src} aria-label={heroAlt}>
+								<source src={withBase(`/media/stories/${heroVideo}.webm`)} type="video/webm" />
+								<source src={withBase(`/media/stories/${heroVideo}.mp4`)} type="video/mp4" />
+							</video>
 						</div>
+					) : (
+						heroImage && (
+							<div class="story-hero">
+								<StoryImage src={heroImage} alt={heroAlt} />
+							</div>
+						)
 					)
 				}
-				<ArticleHeader label={label} title={title} pubDate={new Date(pubDate)} byline={byline} />
+				<ArticleHeader label={label} title={title} pubDate={pubDate ? new Date(pubDate) : undefined} byline={byline} />
 				<div class="story-body">
 					{subtitle && <p class="intro">{subtitle}</p>}
 					<slot />
@@ -60,6 +76,16 @@ if (hero && !heroImage) throw new Error(`Story hero image not found: src/assets/
 		</main>
 	</body>
 </html>
+
+<script>
+	// Respect reduced-motion settings: keep the hero video on its poster frame
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		document.querySelectorAll<HTMLVideoElement>('.story-hero-video').forEach((video) => {
+			video.removeAttribute('autoplay');
+			video.pause();
+		});
+	}
+</script>
 
 <style>
 	.story {
@@ -70,6 +96,14 @@ if (hero && !heroImage) throw new Error(`Story hero image not found: src/assets/
 	.story-hero {
 		width: min(1100px, 100%);
 		margin: 0 auto 3rem;
+	}
+
+	.story-hero-video {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
 	}
 
 	/* Same 720px reading column as the Bio/CV pages */
