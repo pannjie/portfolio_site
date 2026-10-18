@@ -1,79 +1,137 @@
 ---
-import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+interface Props {
+	title: string;
+	description: string;
+	label: string;
+	pubDate: Date;
+	updatedDate?: Date;
+}
+
+const { title, description, label, pubDate, updatedDate } = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
 
-	<body>
+	<body class="grid-page">
 		<Header />
 		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{updatedDate && (
-								<div class="last-updated-on">
-									Last updated on <FormattedDate date={updatedDate} />
-								</div>
-							)}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
+			<article class="page-article">
+				<header class="article-header">
+					<span class="tag tag-filled">{label}</span>
+					<h1>{title}</h1>
+					<span class="tag tag-outline">
+						{updatedDate ? <>Updated <FormattedDate date={updatedDate} /></> : <FormattedDate date={pubDate} />}
+					</span>
+				</header>
+				<div class="article-body">
+					<p class="intro">{description}</p>
 					<slot />
 				</div>
 			</article>
 		</main>
 	</body>
 </html>
+
+<style>
+	.page-article {
+		padding-bottom: 4rem;
+	}
+
+	/* Headline block: large centred title between two small boxes */
+	.article-header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.6rem;
+		text-align: center;
+	}
+
+	.tag {
+		display: inline-block;
+		padding: 0.1rem 0.45rem;
+		font-family: 'VT323', 'Lucida Console', monospace;
+		font-size: 1.15rem;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+	}
+
+	.tag-filled {
+		background: rgb(var(--gray-dark));
+		color: #fff;
+	}
+
+	.tag-outline {
+		border: 1px solid rgb(var(--gray-dark));
+		color: rgb(var(--gray-dark));
+	}
+
+	.article-header h1 {
+		max-width: 100%;
+		margin: 0;
+		font-size: clamp(3.4rem, 8.5vw, 8.5rem);
+		font-weight: 500;
+		line-height: 0.82;
+		letter-spacing: -0.045em;
+		text-wrap: balance;
+	}
+
+	/* Text column: site reading width with a rule down the left edge */
+	.article-body {
+		box-sizing: border-box;
+		max-width: 720px;
+		margin: 4rem auto 0;
+		padding-left: 0.6rem;
+		border-left: 1px solid rgba(var(--gray-dark), 0.6);
+	}
+
+	.article-body :global(p) {
+		margin: 0 0 1em;
+		font-size: 1.1rem;
+		line-height: 1.45;
+		letter-spacing: 0.01em;
+	}
+
+	.article-body .intro {
+		margin-bottom: 3rem;
+		font-style: italic;
+	}
+
+	.article-body :global(h2) {
+		margin: 3rem 0 0.9rem;
+		font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+		font-weight: 500;
+		line-height: 0.95;
+		letter-spacing: -0.035em;
+	}
+
+	.article-body :global(h3) {
+		margin: 2.4rem 0 0.7rem;
+		font-size: 1.75rem;
+		font-weight: 500;
+		line-height: 1;
+		letter-spacing: -0.01em;
+	}
+
+	.article-body > :global(:first-child + h2) {
+		margin-top: 0;
+	}
+
+	@media (max-width: 760px) {
+		.article-header {
+			gap: 1.1rem;
+			padding-top: 1rem;
+		}
+
+		.article-body {
+			margin-top: 2.5rem;
+		}
+	}
+</style>
