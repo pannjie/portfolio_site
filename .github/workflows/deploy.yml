@@ -24,6 +24,9 @@ jobs:
         uses: withastro/action@v6
         with:
           node-version: 22
+        env:
+          # Set under repo Settings → Secrets and variables → Actions
+          PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
 
   deploy:
     needs: build

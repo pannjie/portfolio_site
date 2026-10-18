@@ -24,7 +24,7 @@ export default function CinemaMap({ title, token, styleUrl, layers, minYear, max
 		layers.reduce((n, l) => n + l.data.features.filter((f) => f.properties.opened <= y).length, 0);
 
 	useEffect(() => {
-		if (!container.current) return;
+		if (!container.current || !token) return;
 
 		mapboxgl.accessToken = token;
 		const instance = new mapboxgl.Map({
@@ -87,6 +87,14 @@ export default function CinemaMap({ title, token, styleUrl, layers, minYear, max
 			if (instance.getLayer(layer.id)) instance.setFilter(layer.id, ['<=', ['get', 'opened'], value]);
 		}
 	};
+
+	if (!token) {
+		return (
+			<div class="cinema-map cinema-map--missing">
+				<p>Map unavailable: no Mapbox token configured.</p>
+			</div>
+		);
+	}
 
 	return (
 		<div class="cinema-map">
