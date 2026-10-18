@@ -1,0 +1,159 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.138,
+          51.4625
+        ]
+      },
+      "properties": {
+        "name": "Clapham Picturehouse",
+        "opened": 2000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1148,
+          51.4613
+        ]
+      },
+      "properties": {
+        "name": "The Ritzy (Brixton)",
+        "opened": 2000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1973,
+          51.5087
+        ]
+      },
+      "properties": {
+        "name": "The Gate (Notting Hill)",
+        "opened": 2003
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0098,
+          51.479
+        ]
+      },
+      "properties": {
+        "name": "Greenwich Picturehouse",
+        "opened": 2005
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0554,
+          51.5444
+        ]
+      },
+      "properties": {
+        "name": "Hackney Picturehouse",
+        "opened": 2011
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.133,
+          51.511
+        ]
+      },
+      "properties": {
+        "name": "Central Picturehouse (Piccadilly)",
+        "opened": 2015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1208,
+          51.5816
+        ]
+      },
+      "properties": {
+        "name": "Crouch End Picturehouse",
+        "opened": 2015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0763,
+          51.4604
+        ]
+      },
+      "properties": {
+        "name": "East Dulwich Picturehouse",
+        "opened": 2015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1033,
+          51.4331
+        ]
+      },
+      "properties": {
+        "name": "West Norwood Picturehouse",
+        "opened": 2018
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1065,
+          51.5644
+        ]
+      },
+      "properties": {
+        "name": "Finsbury Park Picturehouse",
+        "opened": 2021
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.3023,
+          51.5133
+        ]
+      },
+      "properties": {
+        "name": "Ealing Picturehouse",
+        "opened": 2023
+      }
+    }
+  ]
+}

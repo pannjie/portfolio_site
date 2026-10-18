@@ -219,9 +219,21 @@ hr {
 	background: linear-gradient(135deg, #dce7e8 0%, #f6fbfc 100%);
 }
 
+.pentagram-grid .project-media img,
+.pentagram-grid .project-media video {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 0;
+	object-fit: cover;
+}
+
 .pentagram-grid .project-hover {
 	position: absolute;
 	inset: 0;
+	z-index: 1;
 	border: 2px solid #111;
 	box-sizing: border-box;
 	pointer-events: none;

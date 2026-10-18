@@ -1,0 +1,19 @@
+---
+// Small source/notes text that sits inside a chart grid cell.
+// A div, not a p: MDX wraps the slotted text in its own <p>, and a <p> can't contain another.
+---
+
+<div class="chart-note"><slot /></div>
+
+<style>
+	.chart-note {
+		align-self: end;
+		color: rgb(var(--gray));
+		font-size: 0.85rem;
+		line-height: 1.4;
+	}
+
+	.chart-note :global(p) {
+		margin: 0;
+	}
+</style>

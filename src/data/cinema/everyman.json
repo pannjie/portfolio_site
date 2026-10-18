@@ -1,0 +1,229 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1573,
+          51.5204
+        ]
+      },
+      "properties": {
+        "name": "Everyman Baker Street",
+        "opened": 2008
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1942,
+          51.6508
+        ]
+      },
+      "properties": {
+        "name": "Everyman Barnet",
+        "opened": 2015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1659,
+          51.5503
+        ]
+      },
+      "properties": {
+        "name": "Everyman Belsize Park",
+        "opened": 2008
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0917,
+          51.5053
+        ]
+      },
+      "properties": {
+        "name": "Everyman Borough Yards",
+        "opened": 2021
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.3061,
+          51.487
+        ]
+      },
+      "properties": {
+        "name": "Everyman Brentford",
+        "opened": 2025
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0864,
+          51.5192
+        ]
+      },
+      "properties": {
+        "name": "Everyman Broadgate",
+        "opened": 2019
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0163,
+          51.5061
+        ]
+      },
+      "properties": {
+        "name": "Everyman Canary Wharf",
+        "opened": 2015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1722,
+          51.4866
+        ]
+      },
+      "properties": {
+        "name": "Everyman Chelsea",
+        "opened": 2020
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0789,
+          51.4222
+        ]
+      },
+      "properties": {
+        "name": "Everyman Crystal Palace",
+        "opened": 2018
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1776,
+          51.5562
+        ]
+      },
+      "properties": {
+        "name": "Everyman Hampstead",
+        "opened": 2000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1257,
+          51.5365
+        ]
+      },
+      "properties": {
+        "name": "Everyman King's Cross,",
+        "opened": 2017
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1866,
+          51.5262
+        ]
+      },
+      "properties": {
+        "name": "Everyman Maida Vale",
+        "opened": 2011
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1441,
+          51.5902
+        ]
+      },
+      "properties": {
+        "name": "Everyman Muswell Hill",
+        "opened": 2015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.103,
+          51.5404
+        ]
+      },
+      "properties": {
+        "name": "Everyman Screen on the Green",
+        "opened": 2008
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0094,
+          51.5434
+        ]
+      },
+      "properties": {
+        "name": "Everyman Stratford",
+        "opened": 2024
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1888,
+          51.5147
+        ]
+      },
+      "properties": {
+        "name": "Everyman The Whiteley",
+        "opened": 2025
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 // @ts-check
 
 import mdx from '@astrojs/mdx';
+import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
@@ -10,7 +11,7 @@ export default defineConfig({
 	// GitHub Pages project site: https://pannjie.github.io/portfolio_site/
 	site: 'https://pannjie.github.io',
 	base: '/portfolio_site',
-	integrations: [mdx(), sitemap()],
+	integrations: [mdx(), sitemap(), preact()],
 	fonts: [
 		{
 			provider: fontProviders.local(),

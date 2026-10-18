@@ -1,0 +1,159 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.148,
+          51.5065
+        ]
+      },
+      "properties": {
+        "name": "Curzon Mayfair",
+        "opened": 2000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1305,
+          51.5128
+        ]
+      },
+      "properties": {
+        "name": "Curzon Soho",
+        "opened": 2000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.3073,
+          51.459
+        ]
+      },
+      "properties": {
+        "name": "Curzon Richmond",
+        "opened": 2000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.2062,
+          51.4194
+        ]
+      },
+      "properties": {
+        "name": "Curzon Wimbledon",
+        "opened": 2009
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1368,
+          51.4977
+        ]
+      },
+      "properties": {
+        "name": "Curzon Victoria",
+        "opened": 2014
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1231,
+          51.5239
+        ]
+      },
+      "properties": {
+        "name": "Curzon Bloomsbury",
+        "opened": 2015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.069,
+          51.5137
+        ]
+      },
+      "properties": {
+        "name": "Curzon Aldgate",
+        "opened": 2017
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1073,
+          51.5081
+        ]
+      },
+      "properties": {
+        "name": "Curzon Sea Containers",
+        "opened": 2018
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1448,
+          51.5405
+        ]
+      },
+      "properties": {
+        "name": "Curzon Camden",
+        "opened": 2021
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0837,
+          51.5323
+        ]
+      },
+      "properties": {
+        "name": "Curzon Hoxton",
+        "opened": 2021
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.3046,
+          51.412
+        ]
+      },
+      "properties": {
+        "name": "Curzon Kingston",
+        "opened": 2022
+      }
+    }
+  ]
+}

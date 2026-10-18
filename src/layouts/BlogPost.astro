@@ -1,6 +1,6 @@
 ---
+import ArticleHeader from '../components/ArticleHeader.astro';
 import BaseHead from '../components/BaseHead.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
 interface Props {
@@ -24,13 +24,7 @@ const { title, description, label, pubDate, updatedDate } = Astro.props;
 		<Header />
 		<main>
 			<article class="page-article">
-				<header class="article-header">
-					<span class="tag tag-filled">{label}</span>
-					<h1>{title}</h1>
-					<span class="tag tag-outline">
-						{updatedDate ? <>Updated <FormattedDate date={updatedDate} /></> : <FormattedDate date={pubDate} />}
-					</span>
-				</header>
+				<ArticleHeader label={label} title={title} pubDate={pubDate} updatedDate={updatedDate} />
 				<div class="article-body">
 					<p class="intro">{description}</p>
 					<slot />
@@ -43,44 +37,6 @@ const { title, description, label, pubDate, updatedDate } = Astro.props;
 <style>
 	.page-article {
 		padding-bottom: 4rem;
-	}
-
-	/* Headline block: large centred title between two small boxes */
-	.article-header {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1.6rem;
-		text-align: center;
-	}
-
-	.tag {
-		display: inline-block;
-		padding: 0.1rem 0.45rem;
-		font-family: 'VT323', 'Lucida Console', monospace;
-		font-size: 1.15rem;
-		line-height: 1.2;
-		letter-spacing: 0.02em;
-	}
-
-	.tag-filled {
-		background: rgb(var(--gray-dark));
-		color: #fff;
-	}
-
-	.tag-outline {
-		border: 1px solid rgb(var(--gray-dark));
-		color: rgb(var(--gray-dark));
-	}
-
-	.article-header h1 {
-		max-width: 100%;
-		margin: 0;
-		font-size: clamp(3.4rem, 8.5vw, 8.5rem);
-		font-weight: 500;
-		line-height: 0.82;
-		letter-spacing: -0.045em;
-		text-wrap: balance;
 	}
 
 	/* Text column: site reading width with a rule down the left edge */
@@ -125,11 +81,6 @@ const { title, description, label, pubDate, updatedDate } = Astro.props;
 	}
 
 	@media (max-width: 760px) {
-		.article-header {
-			gap: 1.1rem;
-			padding-top: 1rem;
-		}
-
 		.article-body {
 			margin-top: 2.5rem;
 		}

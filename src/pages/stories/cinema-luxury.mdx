@@ -1,0 +1,213 @@
+---
+layout: ../../layouts/StoryLayout.astro
+title: Cinema Enters Its Luxury Era
+byline: By PJ
+pubDate: 2026-01-10
+description: Is the future of cinema a pivot to premium? Why London’s premium cinemas are outgrowing their mainstream rivals.
+hero: cinema/battersea1.jpg
+heroAlt: A red-lit cinema auditorium with plush seats; the screen reads “Cinemas only. Coming soon in premium formats”
+---
+
+import ChartNote from '../../components/story/ChartNote.astro';
+import Figure from '../../components/story/Figure.astro';
+import StoryImage from '../../components/story/StoryImage.astro';
+import GrowthChart from '../../components/cinema/GrowthChart';
+import RangeChart from '../../components/cinema/RangeChart';
+import TrendChart from '../../components/cinema/TrendChart';
+import CinemaMap from '../../components/cinema/CinemaMap';
+import { revenueGrowth, ticketPriceRanges, menuPriceRanges, concessionSpend, ticketSpend } from '../../data/cinema/charts';
+import { MAPBOX_TOKEN, MAPBOX_STYLE, cinemaLayers, yearRange } from '../../data/cinema/map';
+
+import whiteleyFoyer from '../../assets/stories/cinema/whiteley_foyer_2.png';
+import palaceCinema from '../../assets/stories/cinema/palace_cinema.jpg';
+import odeonCamden from '../../assets/stories/cinema/odeon_camden.webp';
+import menus from '../../assets/stories/cinema/then_now.png';
+import miumiuShop from '../../assets/stories/cinema/miumiu_shop.jpg';
+import pradaMarket from '../../assets/stories/cinema/prada_veg.webp';
+import netflixHouse from '../../assets/stories/cinema/netflix_house.jpg';
+import picturehouseCentral from '../../assets/stories/cinema/picturehouse_central.jpeg';
+import floatingCinema from '../../assets/stories/cinema/floating_cinema.png';
+
+Netflix CEO Ted Sarandos says that [cinemas are outmoded](https://www.theguardian.com/film/2025/apr/24/netflix-chief-ted-sarandos-says-cinemagoing-is-outmoded-and-the-streamer-is-saving-hollywood). The couple next to me, who ordered Raspberry Mojitos and a £16 Bearnaise Smash Burger, say otherwise.
+
+This is the mise-en-scene at Everyman Whiteley, where I recently paid £21.40 to watch The Roses—a divorce comedy starring Olivia Colman and Benedict Cumberbatch. The foyer, furnished in red velvet and dark wood, resembled an art-deco airport lounge.
+
+<Figure caption="Opened in 2025, Everyman at The Whiteley replaces an Odeon which closed down in 2018. Credit: Everyman">
+	<StoryImage src={whiteleyFoyer} alt="The foyer of Everyman at The Whiteley, furnished in red velvet and dark wood" />
+</Figure>
+
+At the bar, I ordered a £5 Vanilla Matcha and watched it arrive as I sank deep into the theatre’s plush impeccably-laundered sofa like some Ottoman Vizier retiring to his chambers. Minutes later, a staff member announced the start of the film like a herald.
+
+Everyman at The Whiteley is the flagship of the Everyman Media Group, a chain known for pioneering the premium theatre format. Its focus is unabashedly elevated. On [the website](https://www.everymancinema.com/about-everyman/), you are invited to “swap your soft drink for a nice glass of red wine and a slice of freshly-made pizza served to your seat”.
+
+However, the company is not alone in its ambition to transform the modern screen experience. David Sin, who is Head of Cinemas at the Independent Cinema Office, dates this phenomenon to about 2015. Netflix was emerging as a global force and theatres had to respond. “We saw the development of ‘boutique’ cinemas with more F&B offers, elevated audience comfort and broader programming,” he recounted.
+
+Post-covid, this niche has become the norm. The financial data from Companies House shows an industry in flux. Popcorn is giving way to Pinot as premium cinema overtakes its mainstream counterpart.
+
+<Figure
+	size="wide"
+	layout="trio"
+	title="Revenue growth: premium cinemas outperform their mainstream rivals"
+	dek="Year-on-year revenue growth, 2017–2024"
+>
+	<GrowthChart client:visible {...revenueGrowth[0]} />
+	<GrowthChart client:visible {...revenueGrowth[1]} />
+	<GrowthChart client:visible {...revenueGrowth[2]} />
+	<GrowthChart client:visible {...revenueGrowth[3]} />
+	<GrowthChart client:visible {...revenueGrowth[4]} />
+	<ChartNote>
+		Source: Companies House, Mintel.<br />
+		Note: Financial data for Picturehouse is complicated by the bankruptcy of its parent company Cineworld in September 2022. The latest revenue data is a Mintel forecast rather than an audited filing.
+	</ChartNote>
+</Figure>
+
+In 2024, Everyman and Picturehouse reported double-digit revenue growth at 17% and 22% respectively. That same year, Vue and Odeon managed just 4% and 0.4%. The trend has been consistent since at least 2017. In the years before Covid, premium exhibitors reported even stronger growth rates of up to 30%.
+
+Although mainstream cinemas still dwarf their premium counterparts in sheer size, the balance is shifting. Everyman has doubled its admissions from 2.2M to 4.3M since 2017. Neither Vue nor Odeon have matched their pre-Covid peak, in 2019.
+
+Odeon’s balance sheet looks particularly worrying up close. The company, which operates 103 venues across the UK, grew its attendance by just 5% in 2024. It managed an operating profit by cutting costs and closing locations in Covent Garden, Surrey Quays and Bracknell. Come February 2026, [it will shutter Odeon Camden](https://secretldn.com/camden-odeon-closing-february-2026/), a 5-screen building which has been showing pictures since 1937.
+
+<Figure
+	layout="pair"
+	caption="Odeon Camden was originally a Gaumont theatre. It was opened in 1937 as a super-luxe theatre with 986 seats. The venue has changed owners at least three times since. Credit: cinematreasures.org, Odeon"
+>
+	<StoryImage src={palaceCinema} alt="The Gaumont Palace in Camden, as it looked when it opened" />
+	<StoryImage src={odeonCamden} alt="Odeon Camden today" />
+</Figure>
+
+Like every player on the market, the company is rushing out more premium features. Odeon, having kickstarted Odeon Luxe in 2018, now offers VIP beds in nine locations from Milton Keynes to Strathclyde. For the ‘ultimate premium cinematic experience’, you can [book a two-seater Luxe Suite Pod](https://www.odeon.co.uk/experiences/luxe-suite/) to watch your movie in a ‘private cocoon.’
+
+Vue—which offers some of London’s cheapest tickets at £6—has followed suit by adding 200 Ultra Lux leather recliners with built-in champagne coolers.
+
+Company CEO Tim Richards is unapologetically leaning in. “To use an airline analogy, our cinemas are first class and business class,” he boasted to [The Guardian](https://www.theguardian.com/business/2025/dec/26/vip-viewing-cinemas-bet-on-luxury-bars-and-beds-to-usher-in-a-new-film-era).
+
+## Premium Economy
+
+All this talk of matcha and first class might feel a little absurd amidst an [affordability crisis](https://www.ft.com/content/19197369-2bc6-4f57-9d05-0b412fd60271), but there’s a logic to the industry’s luxur-ification.
+
+Since the mid-2010s, theatres big and small have faced competition from Netflix and home cinemas. Covid only accelerated the change by trapping everyone indoors with nothing to do.
+
+Joshua Dedman, who works as a consultant for the creative industry consultancy Olsberg SPI, saw a behavioral shift fueled by hardware upgrades. “Cinemas were immensely popular before. When Covid hit, people obviously couldn’t go. They invested in their home cinemas and now they’ve got all these subscriptions and a great sound system,” he said.
+
+The more people invested into their private theatres, the less inclined they were to leave the house, he argues. In response, there was an arms race. Cinemas fought to win back customers, with wine lists, and reclining seats and other luxury trappings you couldn’t replicate at home.
+
+<Figure size="wide">
+	<CinemaMap
+		client:visible
+		title="London’s premium cinemas have grown at a steady pace"
+		token={MAPBOX_TOKEN}
+		styleUrl={MAPBOX_STYLE}
+		layers={cinemaLayers}
+		minYear={yearRange.min}
+		maxYear={yearRange.max}
+	/>
+</Figure>
+
+Ironically, this premium model proved better suited for the economic funk of contemporary Britain, according to Sin. By installing bigger seats, wider aisles and other amenities, cinemas could trade volume for stability. Money was made by selling out fewer seats at higher prices.
+
+“Cinemas have traditionally operated at a fairly low occupancy,” Sin explained, “but after making the changes, they could achieve higher average occupancy and operate more efficiently.”
+
+<Figure
+	size="wide"
+	layout="pair"
+	title="Smaller cinemas, higher prices?"
+	dek="Growing revenue is no longer just about growing admissions."
+>
+	<RangeChart
+		client:visible
+		title="Ticket price range: Avatar: Fire and Ash"
+		items={ticketPriceRanges}
+		color="#4a64b5"
+		minLabel="Cheapest ticket"
+		maxLabel="Priciest ticket"
+	/>
+	<RangeChart
+		client:visible
+		title="Menu price range: cheapest to costliest item"
+		items={menuPriceRanges}
+		color="#d1495b"
+		minLabel="Cheapest item"
+		maxLabel="Costliest item"
+	/>
+</Figure>
+
+Phil Clapp, CEO of the UK Cinema Association agrees in principle. “Cinemas are having to work much harder to encourage people out of the home,” he wrote over email. The problem, however, wasn’t just the pandemic or the UK economy. It was the tumult of the whole film industry, Clapp explained, with its strikes, shortened theatrical windows, and studios acquiring one another to the detriment of ‘good film content’.
+
+“Cinemas have only a limited ability to influence the quality of films on offer, so much of the emphasis has been on improving the experience through premium offerings,” he said. Faced with studios [more keen on merger than movies](https://deadline.com/2026/01/paramount-netflix-warner-bros-house-antitrust-1236677368/), theatres have chosen—like so many people after a bad breakup—to invest in themselves.
+
+The investments in food and beverages also confer a special advantage, Clapp points out. As ‘discretionary spend’, they do not deter visitors in the same way that high ticket prices do. Since no one is legally obliged to buy the Dark Cherry Amaretto Sours (£11.95), it is ‘less likely to act as a disincentive to attendance’.
+
+<Figure caption="The menu at Everyman Hampstead has undergone radical changes since 2016.">
+	<StoryImage src={menus} alt="The Everyman Hampstead menu in 2016 beside the menu today" contain />
+</Figure>
+
+No wonder there’s a boom in cinema catering, as menus are upgraded and wine lists expanded. Picturehouse offers a Roasted Pear Salad, ‘Posh dogs’ and panoramas of Central London from its Members Bar. At Everyman, you could have a three-course meal. Padron peppers, followed by a Fig, Pear and Gorgonzola pizza, then finished with an Everything Sundae.
+
+Even Curzon, better known for its arthouse focus, now offers Moët & Chandon Brut for £69.
+
+The strategy appears to be working. In 2017, the average Everyman customer spent £5.96 on concessions. In 2025, that number had increased by 78% to £10.64. Vue, the faster growing mainstream cinema, managed 39% growth in average concession spend, with each customer spending just £3.32.
+
+<Figure size="wide" layout="pair" title="Increased concession sales make up for stagnant ticket prices">
+	<TrendChart client:visible title="Average concession spend per customer" {...concessionSpend} />
+	<TrendChart client:visible title="Average ticket price" {...ticketSpend} />
+</Figure>
+
+In contrast, ticket prices have barely budged. None of the chains, at least those who published their prices, saw more than 10% growth. Adjusted for inflation at BoE’s 3.44% per annum, it’s actually cheaper to catch a movie at Vue or Odeon today, as compared to seven years ago.
+
+This new focus on food might be more than just a financial response. Dr Shuo Feng, a lecturer of Luxury Brand Management at Goldsmiths, believes that luxury itself is changing with the times. Consumers are no longer conforming to the same familiar patterns.
+
+Every year, in their very first class, Dr Feng’s students are quizzed on how they defined or understood luxury. “In the past, lots of students will say status or quality,” she explained, “This year, however, the answer was self-rewarding”.
+
+The modern luxury consumer, it seems, doesn’t want to communicate status to the world. They want to withdraw into comfort and indulgence. “Instead of handbags, they choose comfortable home furniture or intangible experiences like holidays,” noted Dr Feng. They also favour entertainment or subcultural experiences, she added, citing recent luxury projects like the Prada-branded food market in Shanghai, or Miu Miu’s launch of Summer Reads—a feminist book club.
+
+<Figure
+	layout="pair"
+	caption="Luxury brands are experimenting with book clubs, pop-ups and other new ways of engaging potential customers. Credit: Miu Miu, Prada."
+>
+	<StoryImage src={miumiuShop} alt="A Miu Miu Summer Reads pop-up" />
+	<StoryImage src={pradaMarket} alt="Prada-branded produce at a food market in Shanghai" />
+</Figure>
+
+Cinemas are perfectly poised to provide that intangible cultural moment mixed with elevated comfort. In her view, the recent successes look a lot like private clubs. “They’re offering not just an opportunity to see those films, but creating a community where you can watch, chat with friends, and attend events together,” she added.
+
+Dedman—a self-confessed cinephile and longtime Everyman member—has observed the same shift, from a different angle. For all of streaming’s hegemonic power, he argues, there’s been a parallel development in immersive live experiences like [Secret Cinema](https://www.secretcinema.com/). There is a growing demand for companies that fuse film with the experiential, by turning auditoriums into sets, and audiences into participants.
+
+“The sociologists would say, everyone’s a bit sick of formulaic digital homogenous content, and they actually want to be in events that are one-off,” he added.
+
+<Figure caption="Netflix House Philadelphia and Dallas opened in late 2025. Its Las Vegas location is set to open in 2027. Credit: Netflix.">
+	<StoryImage src={netflixHouse} alt="The exterior of a Netflix House venue" />
+</Figure>
+
+Netflix, for all its techno-exceptionalism, is copying the model. Inside America’s dead malls, the streaming company is building Netflix House—immersive spaces that are equal parts movie theatre, brand activation and adult playground. For US$39, you can eliminate your friends at Squid Game, try a One Piece escape room, and dine on dishes inspired by its IP.
+
+Despite a [mixed reception](https://www.esquire.com/entertainment/a69381621/netflix-house-experience-preview/), more are coming. “It’s quite ironic,” Dedman observes, “They are all about doings things online and bringing content into your living room… but they’re actively making these immersive collective community events.”
+
+## Someone Else’s Sofa
+
+Unfortunately, most investors are not impressed. On 9 Dec 2025, share prices for Everyman Media Group [fell by 18-24%](https://www.ajbell.co.uk/news/articles/everyman-shares-drop-earnings-forecast-cut-amid-weak-uk-box-office), after the firm reported weaker-than-expected earnings. Its CEO, Alex Scrimgeour, departed just three weeks later on 29 December, despite achieving ‘key growth in all metrics’.
+
+The reason for its weak performance remains a mystery. The BBC blamed a market [now crowded with premium offerings](https://www.bbc.co.uk/news/articles/ce8q8zejgpdo). Others, however, cited a weak fourth quarter lacking in good movies. The latter seemed like the more probable reason. The company also missed its targets in 2024 due to the failure of Joker: Folie á Deux. The original Joker grossed a billion dollars worldwide. The sequel did just north of $200 million.
+
+The latest market research offers cliffhangers instead of answers. Research agency [Mintel’s 2025 report](https://store.mintel.com/report/uk-film-and-cinema-market-report) captures ‘contradictory responses’ from cinemagoers. One survey of 1,925 respondents gave the following result: 75% wanted the big screen while 63% said they would wait for streaming. 50%, as the analyst notes drily, ticked both boxes.
+
+<Figure caption="Despite the bankruptcy of its parent company Cineworld, Picturehouse continues to grow. Credit: Picturehouse.">
+	<StoryImage src={picturehouseCentral} alt="Picturehouse Central in London" />
+</Figure>
+
+Questions on pricing yielded even murkier insights. 7 out of 10 respondents said that price was a barrier to entry, but it didn’t stop them from choosing the pricier boutique/luxe cinemas—which grew by 9% this year.
+
+My own interviewees were no more predictable. When asked if she would consider Everyman or Picturehouse for a movie like Avatar: Fire and Ash, Dr. Feng laughed.
+
+“Well no, firstly the film is not to my interest, and secondly, I have a sofa at home. Why would I bother to take a train to sit on someone else’s sofa?” she said.
+
+However, she did take a much longer train ride to catch [Demon Slayer](https://whatson.bfi.org.uk/imax/Online/default.asp?BOparam::WScontent::loadArticle::permalink=demon-slayer-kimetsu-no-yaiba-infinity-castle) on BFI’s sofa. Picturehouse’s 12-hour LOTR marathon was also a tempting prospect because, unlike Avatar, that was a 'good movie'.
+
+At the other end, there are hardcore cinephiles who won’t compromise. Joshua Dedman is retaining his Everyman membership for the previews and [Monday 2-for-1 special](https://www.everymancinema.com/membership/). “Even though you’re paying double the price, you are getting a better experience,” he argues. He did consider switching over to Picturehouse but found its surfaces just a little too sticky for his liking.
+
+<Figure caption="A projector and a pub, built on a refurbished barge. Credit: UP-Projects">
+	<StoryImage src={floatingCinema} alt="The Floating Cinema, a cinema built on a refurbished canal barge" />
+</Figure>
+
+Unlike the Marvel blockbusters of the late 2010s, there seems to be no clear sequel in store for the luxury cinema. Audiences are keen, or so they claim. Investors are sceptical, or so they seem. But even in a market as tumultuous as our current moment, there are those who chose to invest in [ultra-luxe private cinemas](https://www.theguardian.com/film/2025/nov/20/new-york-luxury-movie-theater-private-cinema), [cinemas built in former recording studios](https://www.screendaily.com/comment/olympic-studios-opens-in-barnes/5062727.article), [grindhouse cinemas](https://thenickel.co.uk/) and [canal cinemas floating on refurbished barges](https://www.morrisand.company/work/floating-cinema).
+
+They might not be a good investment, [according to the analysts](https://www.insidermedia.com/news/national/everyman-chief-exits-weeks-after-profit-warning-amid-weak-box-office-and-falling-sales), but most audiences aren’t looking for an investment when the light dims.

@@ -1,0 +1,145 @@
+---
+import type { ImageMetadata } from 'astro';
+import ArticleHeader from '../components/ArticleHeader.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import StoryImage from '../components/story/StoryImage.astro';
+import { SITE_TITLE } from '../consts';
+
+// Props come from the MDX page's frontmatter
+interface Props {
+	frontmatter: {
+		title: string;
+		/** Optional filled box above the title */
+		label?: string;
+		byline: string;
+		pubDate: string;
+		/** For search results and link previews; not shown on the page */
+		description: string;
+		/** Optional italic intro line above the first paragraph */
+		subtitle?: string;
+		/** Optional image above the title, as a path inside src/assets/stories/ */
+		hero?: string;
+		heroAlt?: string;
+	};
+}
+
+const { title, label, byline, pubDate, description, subtitle, hero, heroAlt = '' } = Astro.props.frontmatter;
+
+// Frontmatter can't import images, so look the hero up by its path
+const storyImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/stories/**/*.{jpg,jpeg,png,webp}', {
+	eager: true,
+});
+const heroImage = hero ? storyImages[`/src/assets/stories/${hero}`]?.default : undefined;
+if (hero && !heroImage) throw new Error(`Story hero image not found: src/assets/stories/${hero}`);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} | ${SITE_TITLE}`} description={description} />
+	</head>
+
+	<body class="grid-page">
+		<Header />
+		<main>
+			<article class="story">
+				{
+					heroImage && (
+						<div class="story-hero">
+							<StoryImage src={heroImage} alt={heroAlt} />
+						</div>
+					)
+				}
+				<ArticleHeader label={label} title={title} pubDate={new Date(pubDate)} byline={byline} />
+				<div class="story-body">
+					{subtitle && <p class="intro">{subtitle}</p>}
+					<slot />
+				</div>
+			</article>
+		</main>
+	</body>
+</html>
+
+<style>
+	.story {
+		padding-bottom: 5rem;
+	}
+
+	/* Hero image above the title, same width as the wide figures */
+	.story-hero {
+		width: min(1100px, 100%);
+		margin: 0 auto 3rem;
+	}
+
+	/* Same 720px reading column as the Bio/CV pages */
+	.story-body {
+		--wide: min(1100px, calc(100vw - var(--sidebar-width) - var(--sidebar-left-offset) - 2.5rem));
+		--medium: min(960px, var(--wide));
+
+		box-sizing: border-box;
+		max-width: 720px;
+		margin: 4rem auto 0;
+	}
+
+	.story-body > :global(p) {
+		margin: 0 0 1em;
+		font-size: 1.1rem;
+		line-height: 1.5;
+		letter-spacing: 0.01em;
+	}
+
+	.story-body .intro {
+		margin-bottom: 2.5rem;
+		font-style: italic;
+	}
+
+	.story-body > :global(p a) {
+		color: inherit;
+		text-decoration: underline;
+		text-decoration-thickness: 0.06em;
+		text-underline-offset: 3px;
+	}
+
+	.story-body > :global(p a:hover) {
+		background: #000;
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.story-body > :global(h2) {
+		margin: 4rem 0 1rem;
+		font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+		font-weight: 500;
+		line-height: 0.95;
+		letter-spacing: -0.035em;
+	}
+
+	/* Figures break out of the column, centred on it */
+	.story-body :global(.figure) {
+		position: relative;
+		box-sizing: border-box;
+		width: var(--w, 100%);
+		margin: 3rem 0 3rem calc((100% - var(--w, 100%)) / 2);
+		background: #fff;
+	}
+
+	.story-body :global(.figure--wide) {
+		--w: var(--wide);
+	}
+
+	.story-body :global(.figure--medium) {
+		--w: var(--medium);
+	}
+
+	@media (max-width: 760px) {
+		.story-body {
+			margin-top: 2.5rem;
+		}
+
+		.story-body :global(.figure--wide),
+		.story-body :global(.figure--medium) {
+			--w: 100%;
+		}
+	}
+</style>

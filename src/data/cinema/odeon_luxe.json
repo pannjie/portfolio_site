@@ -1,0 +1,213 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.2789,
+          51.5273
+        ]
+      },
+      "properties": {
+        "name": "Odeon Acton",
+        "address": "Western Ave, London W3 0PA",
+        "neighbourhood": "Park Royal",
+        "opened": 2022
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.2642,
+          51.3341
+        ]
+      },
+      "properties": {
+        "name": "Odeon Epsom",
+        "address": "Upper High St, Epsom KT17 4RJ",
+        "neighbourhood": "Epsom",
+        "opened": 2020
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1171,
+          51.5543
+        ]
+      },
+      "properties": {
+        "name": "Odeon Holloway",
+        "address": "419-427 Holloway Rd, London N7 6LJ",
+        "neighbourhood": "Holloway Road",
+        "opened": 2020
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1055,
+          51.5349
+        ]
+      },
+      "properties": {
+        "name": "Odeon Islington",
+        "address": "13 High Street, London N1 8FQ",
+        "neighbourhood": "Highbury & Islington",
+        "opened": 2019
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.306,
+          51.4116
+        ]
+      },
+      "properties": {
+        "name": "Odeon Kingston",
+        "address": "Wood St, Kingston upon Thames KT1 1TP",
+        "neighbourhood": "Kingston",
+        "opened": 2022
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.0381,
+          51.6247
+        ]
+      },
+      "properties": {
+        "name": "Odeon Lee Valley",
+        "address": "Picketts Lock Ln, London N18 3BA",
+        "neighbourhood": "Ponders End",
+        "opened": 2018
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1315,
+          51.51
+        ]
+      },
+      "properties": {
+        "name": "Odeon Haymarket",
+        "address": "11-18 Panton St, London SW1Y 4DP",
+        "neighbourhood": "Leicester Square",
+        "opened": 2017
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1303,
+          51.5104
+        ]
+      },
+      "properties": {
+        "name": "Odeon Leicester Sq",
+        "address": "22-24 Leicester Square, London WC2H 7LQ",
+        "neighbourhood": "Leicester Square",
+        "opened": 2018
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1336,
+          51.5186
+        ]
+      },
+      "properties": {
+        "name": "Odeon Tottenham Ct Rd",
+        "address": "30 Tottenham Court Rd, London W1T 1BD",
+        "neighbourhood": "Goodge Street",
+        "opened": 2017
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1307,
+          51.5102
+        ]
+      },
+      "properties": {
+        "name": "Odeon West End",
+        "address": "Leicester Square, London WC2H 7LQ",
+        "neighbourhood": "Leicester Square",
+        "opened": 2017
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.2128,
+          51.4627
+        ]
+      },
+      "properties": {
+        "name": "Odeon Putney",
+        "address": "274 Putney Bridge Rd, London SW15 2PT",
+        "neighbourhood": "Putney Bridge",
+        "opened": 2017
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1749,
+          51.5434
+        ]
+      },
+      "properties": {
+        "name": "Odeon Swiss Cottage",
+        "address": "96 Finchley Rd, London NW3 5EL",
+        "neighbourhood": "Swiss Cottage",
+        "opened": 2017
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.4789,
+          51.5463
+        ]
+      },
+      "properties": {
+        "name": "Odeon Uxbridge",
+        "address": "The Chimes, High St, Uxbridge UB8 1GD",
+        "neighbourhood": "Uxbridge",
+        "opened": 2024
+      }
+    }
+  ]
+}

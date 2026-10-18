@@ -3,17 +3,27 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import PentagramGrid from '../../components/PentagramGrid.astro';
 import { SITE_TITLE } from '../../consts';
+import cinemaHero from '../../assets/stories/cinema/battersea1.jpg';
+import chronicleLaunchPoster from '../../assets/stories/chronicle/launch-poster.jpg';
 
 const stories = [
 	{
 		title: 'Chronicle of a War Foretold',
+		label: 'Prediction markets',
 		description: 'Investigative long-form visual story on prediction markets and conflict timing.',
 		href: '/stories/chronicle/',
+		video: {
+			webm: '/media/stories/chronicle-launch.webm',
+			mp4: '/media/stories/chronicle-launch.mp4',
+			poster: chronicleLaunchPoster,
+		},
 	},
 	{
-		title: 'Lorem ipsum dolor sit amet',
-		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-		href: '/about/',
+		title: 'Cinema Enters Its Luxury Era',
+		label: 'Business',
+		description: 'Data story on why London’s premium cinemas are outgrowing their mainstream rivals.',
+		href: '/stories/cinema-luxury/',
+		image: cinemaHero,
 	},
 	{
 		title: 'Consectetur adipiscing elit',

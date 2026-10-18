@@ -1,0 +1,80 @@
+---
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	/** Optional filled box above the title */
+	label?: string;
+	title: string;
+	pubDate: Date;
+	updatedDate?: Date;
+	/** Optional author box shown beside the date box */
+	byline?: string;
+}
+
+const { label, title, pubDate, updatedDate, byline } = Astro.props;
+---
+
+<!-- Large centred headline with small boxes above and below -->
+<header class="article-header">
+	{label && <span class="tag tag-filled">{label}</span>}
+	<h1>{title}</h1>
+	<div class="tag-row">
+		{byline && <span class="tag tag-outline">{byline}</span>}
+		<span class="tag tag-outline">
+			{updatedDate ? <>Updated <FormattedDate date={updatedDate} /></> : <FormattedDate date={pubDate} />}
+		</span>
+	</div>
+</header>
+
+<style>
+	.article-header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.6rem;
+		text-align: center;
+	}
+
+	.tag {
+		display: inline-block;
+		padding: 0.1rem 0.45rem;
+		font-family: 'VT323', 'Lucida Console', monospace;
+		font-size: 1.15rem;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+	}
+
+	.tag-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.tag-filled {
+		background: rgb(var(--gray-dark));
+		color: #fff;
+	}
+
+	.tag-outline {
+		border: 1px solid rgb(var(--gray-dark));
+		color: rgb(var(--gray-dark));
+	}
+
+	.article-header h1 {
+		max-width: 100%;
+		margin: 0;
+		font-size: clamp(3.4rem, 8.5vw, 8.5rem);
+		font-weight: 500;
+		line-height: 0.82;
+		letter-spacing: -0.045em;
+		text-wrap: balance;
+	}
+
+	@media (max-width: 760px) {
+		.article-header {
+			gap: 1.1rem;
+			padding-top: 1rem;
+		}
+	}
+</style>

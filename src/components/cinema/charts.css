@@ -1,0 +1,40 @@
+/* Shared styles for the cinema story's chart and map islands */
+
+.chart-cell {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	min-width: 0;
+}
+
+/* Same filled VT323 box as the project-card labels */
+.chart-label {
+	align-self: flex-start;
+	padding: 0.05rem 0.4rem;
+	background: rgb(var(--gray-dark));
+	color: #fff;
+	font-family: 'VT323', 'Lucida Console', monospace;
+	font-size: 1.05rem;
+	line-height: 1.2;
+	letter-spacing: 0.02em;
+}
+
+.chart-label-note {
+	opacity: 0.7;
+	text-transform: lowercase;
+}
+
+.chart-canvas {
+	width: 100%;
+	height: 400px;
+}
+
+.chart-canvas--small {
+	height: 280px;
+}
+
+@media (max-width: 760px) {
+	.chart-canvas {
+		height: 340px;
+	}
+}

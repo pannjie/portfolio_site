@@ -1,0 +1,48 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	/** Crop to a fixed height on wide screens (originals vary a lot in shape) */
+	crop?: boolean;
+	/** Show the whole image without cropping, e.g. for the menu comparison */
+	contain?: boolean;
+}
+
+const { src, alt, crop = true, contain = false } = Astro.props;
+---
+
+<Image
+	src={src}
+	alt={alt}
+	widths={[480, 960, 1440, 1920].filter((w) => w <= src.width)}
+	sizes="(max-width: 760px) 100vw, 960px"
+	class:list={['story-image', { 'story-image--crop': crop && !contain, 'story-image--contain': contain }]}
+/>
+
+<style>
+	.story-image {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 0;
+	}
+
+	.story-image--crop {
+		max-height: 560px;
+		object-fit: cover;
+	}
+
+	.story-image--contain {
+		max-height: 620px;
+		object-fit: contain;
+	}
+
+	@media (max-width: 760px) {
+		.story-image--crop {
+			max-height: 380px;
+		}
+	}
+</style>

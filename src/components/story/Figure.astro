@@ -1,0 +1,81 @@
+---
+interface Props {
+	/** wide: charts and map; medium: photos; column: same width as the text */
+	size?: 'wide' | 'medium' | 'column';
+	/** single: one item; pair: two side by side; trio: grid of up to three per row */
+	layout?: 'single' | 'pair' | 'trio';
+	title?: string;
+	dek?: string;
+	caption?: string;
+}
+
+const { size = 'medium', layout = 'single', title, dek, caption } = Astro.props;
+---
+
+<figure class:list={['figure', `figure--${size}`]}>
+	{
+		(title || dek) && (
+			<div class="figure-head">
+				{title && <h3>{title}</h3>}
+				{dek && <p class="figure-dek">{dek}</p>}
+			</div>
+		)
+	}
+	<div class:list={['figure-body', `figure-body--${layout}`]}>
+		<slot />
+	</div>
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+	.figure-head {
+		margin-bottom: 1.2rem;
+	}
+
+	h3 {
+		margin: 0;
+		font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+		font-weight: 500;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+
+	.figure .figure-dek {
+		margin: 0.4rem 0 0;
+		color: rgb(var(--gray));
+		font-size: 1rem;
+	}
+
+	.figure-body--pair {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.figure-body--trio {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 2rem 1.4rem;
+	}
+
+	figcaption {
+		margin-top: 0.6rem;
+		color: rgb(var(--gray));
+		font-size: 0.85rem;
+		line-height: 1.4;
+	}
+
+	@media (max-width: 1080px) {
+		.figure-body--trio {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 760px) {
+		.figure-body--pair,
+		.figure-body--trio {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
