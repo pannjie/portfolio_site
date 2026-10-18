@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/withBase';
+
 type GridItem = {
 	title: string;
 	description: string;
@@ -17,7 +19,7 @@ const { items } = Astro.props;
 		{
 			items.map((item, index) => (
 				<article class="grid-item">
-					<a class="project-card" href={item.href}>
+					<a class="project-card" href={withBase(item.href)}>
 						<div class="card-topline" aria-hidden="true">
 							<span class="card-label">{item.title}</span>
 						</div>

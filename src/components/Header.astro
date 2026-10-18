@@ -1,10 +1,11 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import { withBase } from '../utils/withBase';
 ---
 
 <header class="site-header">
 	<nav aria-label="Primary">
-		<h2><a href="/">PJ</a></h2>
+		<h2><a href={withBase('/')}>PJ</a></h2>
 		<ul class="tree-view site-tree" role="tree" aria-label="Site pages">
 			<li>
 				<details open>
@@ -38,8 +39,8 @@ import HeaderLink from './HeaderLink.astro';
 	.site-header h2 {
 		margin: 0;
 		max-width: 7rem;
-		font-size: 0.8rem;
-		font-weight: 300;
+		font-size: 1rem;
+		font-weight: 500;
 		letter-spacing: 0.16em;
 		line-height: 1.65;
 		text-transform: uppercase;
