@@ -15,7 +15,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<Header />
 		<main>
 			<section class="home-blank" aria-label="Homepage intro">
-				<h1>Hi, you have reached PJ, a journalist/writer based in <span>London<span class="slide">&nbsp;+ Singapore</span></span>. I <span class="font">write stories</span>, build <span class="interactive">interactives</span>, and obsess over <span class="data">data</span></h1>
+				<h1>Hi, you have reached PJ, a journalist/writer based in <span>London<span class="slide">&nbsp;+ Singapore</span></span>. I <span class="font">write stories</span>, build <span class="interactive">interactives</span>, and obsess over <span class="data"><span class="slide slide-left">&#123;</span>data<span class="slide">&#125;</span></span></h1>
 				<p>
 					<span class="pr-7"> Reach me at </span>
 					<!-- Same filled box as the site's labels and the CV download buttons -->
@@ -67,6 +67,13 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		clip-path: inset(-0.5em 0 -0.5em 0);
 	}
 
+	/* A slide placed before its word (the "{" in {data}): keep the text against the word,
+	   so it grows out leftwards instead of rightwards */
+	.slide-left {
+		display: inline-flex;
+		justify-content: flex-end;
+	}
+
 	.home-blank p {
 		margin: 3.5rem 0 0;
 		font-size: clamp(0.88rem, 1.2vw, 9rem);
@@ -91,6 +98,13 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+	// Width of a slide's text, measured directly (scrollWidth misses text that overflows leftwards, like the "{")
+	const textWidth = (el: HTMLElement) => {
+		const range = document.createRange();
+		range.selectNodeContents(el);
+		return range.getBoundingClientRect().width;
+	};
+
 	slides.forEach((slide) => {
 		// Touch screens can't hover, so show the full text there
 		if (!canHover) {
@@ -104,7 +118,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 		phrase.addEventListener('mouseenter', () => {
 			gsap.to(slide, {
-				width: slide.scrollWidth,
+				width: textWidth(slide),
 				duration: reduceMotion ? 0 : 0.6,
 				ease: 'power3.out',
 				overwrite: true,
