@@ -21,9 +21,21 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 					<!-- Same filled box as the site's labels and the CV download buttons -->
 					<a
 						href="mailto:pannjie@gmail.com"
+						data-copy-email
 						class="ml-1 inline-block bg-ink px-[0.45rem] py-[0.1rem] align-baseline font-pixel text-[1.15rem] leading-[1.2] tracking-[0.02em] text-white! no-underline transition-colors hover:bg-black hover:text-white! focus-visible:bg-black focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ink"
 						>pannjie@gmail.com</a
 					>
+					<span class="sr-only" aria-live="polite" data-copy-status></span>
+				</p>
+				<p class="lower">
+					<span class="pr-1"> Or maybe  </span>
+					<!-- Same filled box as the site's labels and the CV download buttons -->
+					<a
+						href="https://www.linkedin.com/in/pan-jie-a70173b2/"
+						class="ml-1 inline-block bg-ink px-[0.45rem] py-[0.1rem] align-baseline font-pixel text-[1.15rem] leading-[1.2] tracking-[0.02em] text-white! no-underline transition-colors hover:bg-black hover:text-white! focus-visible:bg-black focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ink"
+						>linkedin.com/in/pan-jie-a70173b2</a
+					>
+					<span class="sr-only" aria-live="polite" data-copy-status></span>
 				</p>
 			</section>
 		</main>
@@ -64,6 +76,14 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		line-height: 1.3;
 		word-spacing: 2rem;
 	}
+
+	.home-blank .lower {
+		margin: 1rem 0 0;
+		font-size: clamp(0.88rem, 1.2vw, 9rem);
+		line-height: 1.3;
+		word-spacing: 0.8rem;
+	}
+
 </style>
 
 <script>
@@ -95,4 +115,27 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		});
 	});
 
+
+	// Email button: copies the address as well as opening the mail app, so it's useful even when
+	// the visitor has no email app or webmail set up for mailto: links.
+	const emailLink = document.querySelector<HTMLAnchorElement>('[data-copy-email]');
+	const copyStatus = document.querySelector<HTMLElement>('[data-copy-status]');
+
+	emailLink?.addEventListener('click', async () => {
+		const address = emailLink.href.replace('mailto:', '');
+		try {
+			await navigator.clipboard.writeText(address);
+		} catch {
+			return; // Clipboard blocked: the mailto link still works on its own
+		}
+		// Keep the box the same width while it says "Copied!"
+		emailLink.style.minWidth = `${emailLink.offsetWidth}px`;
+		emailLink.textContent = 'Copied!';
+		if (copyStatus) copyStatus.textContent = 'Email address copied';
+		setTimeout(() => {
+			emailLink.textContent = address;
+			emailLink.style.minWidth = '';
+			if (copyStatus) copyStatus.textContent = '';
+		}, 1600);
+	});
 </script>
