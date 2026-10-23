@@ -2,31 +2,42 @@
 import ArticleHeader from '../components/ArticleHeader.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION } from '../consts';
 
 interface Props {
 	title: string;
-	description: string;
-	label: string;
-	pubDate: Date;
+	/** Italic intro line, also used for search results and link previews */
+	description?: string;
+	/** Filled box above the title */
+	label?: string;
+	pubDate?: Date;
 	updatedDate?: Date;
+	/** Show dates as Oct 22, 2026 (day, default) or Oct 2026 (month) */
+	datePrecision?: 'day' | 'month';
 }
 
-const { title, description, label, pubDate, updatedDate } = Astro.props;
+const { title, description, label, pubDate, updatedDate, datePrecision } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description ?? SITE_DESCRIPTION} />
 	</head>
 
 	<body class="grid-page">
 		<Header />
 		<main>
 			<article class="page-article">
-				<ArticleHeader label={label} title={title} pubDate={pubDate} updatedDate={updatedDate} />
+				<ArticleHeader
+					label={label}
+					title={title}
+					pubDate={pubDate}
+					updatedDate={updatedDate}
+					datePrecision={datePrecision}
+				/>
 				<div class="article-body">
-					<p class="intro">{description}</p>
+					{description && <p class="intro">{description}</p>}
 					<slot />
 				</div>
 			</article>

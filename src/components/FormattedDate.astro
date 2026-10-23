@@ -1,15 +1,17 @@
 ---
 interface Props {
 	date: Date;
+	/** 'day' → Oct 22, 2026 (default); 'month' → Oct 2026 */
+	precision?: 'day' | 'month';
 }
 
-const { date } = Astro.props;
+const { date, precision = 'day' } = Astro.props;
 ---
 
-<time datetime={date.toISOString()}>
+<time datetime={precision === 'month' ? date.toISOString().slice(0, 7) : date.toISOString()}>
 	{date.toLocaleDateString('en-us', {
 		year: 'numeric',
 		month: 'short',
-		day: 'numeric',
+		...(precision === 'day' && { day: 'numeric' }),
 	})}
 </time>

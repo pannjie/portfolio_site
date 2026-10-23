@@ -1,15 +1,93 @@
 ---
+import { getImage } from 'astro:assets';
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
 import Layout from '../layouts/BlogPost.astro';
+import { withBase } from '../utils/withBase';
+import page1 from '../assets/cv/cv-page-1.png';
+import page2 from '../assets/cv/cv-page-2.png';
+
+// Rendered from stuff/cv.pdf at 200 dpi. Each page gets a full-size version for the
+// lightbox and a smaller one for the preview on the page.
+const pages = await Promise.all(
+	[page1, page2].map(async (src, i) => ({
+		full: await getImage({ src, width: src.width, format: 'webp' }),
+		preview: await getImage({ src, width: 720, format: 'webp' }),
+		width: src.width,
+		height: src.height,
+		label: `CV, page ${i + 1} of 2`,
+	}))
+);
+
+const downloads = [
+	{ label: 'Download PDF', href: '/files/PJ-CV.pdf', size: '74 KB' },
+	{ label: 'Download DOCX', href: '/files/PJ-CV.docx', size: '20 KB' },
+];
 ---
 
-<Layout
-	title="CV"
-	label="CV"
-	description="Experience, education, and selected achievements."
-	pubDate={new Date('October 15 2026')}
->
-	<p>
-		Use this page to summarize your work history, education, awards, and skills. You can also add
-		a downloadable PDF link and a concise profile statement here.
-	</p>
+<Layout title="CV" updatedDate={new Date('October 22 2026')} datePrecision="month">
+	<!-- Download buttons, styled like the site's filled label boxes.
+	     Utilities ending in ! override global.css rules (a colour, img radius), which sit outside Tailwind's layers. -->
+	
+
+	<!-- CV pages: click to open full size in lightGallery, with zoom -->
+	<div id="cv-gallery" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+		{
+			pages.map(({ full, preview, width, height, label }) => (
+				<a
+					href={full.src}
+					data-lg-size={`${width}-${height}`}
+					data-sub-html={`<p>${label}</p>`}
+					class="group block border border-ink/35 transition-colors hover:border-ink"
+				>
+					<img
+						src={preview.src}
+						width={preview.attributes.width}
+						height={preview.attributes.height}
+						alt={label}
+						loading="lazy"
+						class="block h-auto w-full rounded-none!"
+					/>
+				</a>
+			))
+		}
+	</div>
+	<div class="mt-3 text-sm text-muted">Click a page to enlarge it.</div>
+	<div class="mb-8 mt-8 flex flex-wrap gap-2">
+		{
+			downloads.map(({ label, href, size }) => (
+				<a
+					href={withBase(href)}
+					download
+					class="inline-flex items-baseline gap-2 bg-ink px-[0.45rem] py-[0.1rem] font-pixel text-[1.15rem] leading-[1.2] tracking-[0.02em] text-white! no-underline transition-colors hover:bg-black hover:text-white! focus-visible:bg-black focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ink"
+				>
+					<span aria-hidden="true">↓</span>
+					{label}
+					<span class="text-white/60">{size}</span>
+				</a>
+			))
+		}
+	</div>
 </Layout>
+
+<style is:global>
+	/* The lightbox lives outside the page markup; undo global.css's rounded images there too */
+	.lg-outer .lg-image {
+		border-radius: 0;
+	}
+</style>
+
+<script>
+	import lightGallery from 'lightgallery';
+	import lgZoom from 'lightgallery/plugins/zoom';
+
+	const gallery = document.getElementById('cv-gallery');
+	if (gallery) {
+		lightGallery(gallery, {
+			plugins: [lgZoom],
+			speed: 400,
+			download: false,
+			mobileSettings: { controls: true, showCloseIcon: true, download: false },
+		});
+	}
+</script>
