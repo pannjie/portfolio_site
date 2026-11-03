@@ -6,3 +6,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
 	readonly env: ImportMetaEnv;
 }
+
+// The prebuilt Plotly bundle ships without type definitions
+declare module 'plotly.js-basic-dist-min';

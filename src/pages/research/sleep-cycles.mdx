@@ -1,0 +1,69 @@
+---
+layout: ../../layouts/StoryLayout.astro
+title: Geolocation of crypto wallets using sleep cycles
+byline: By PJ
+description: Can you tell where a Polymarket trader lives from when they stop trading? Testing a sleep-cycle geolocation method on four crypto wallets.
+pubDate: 2026-09-27
+---
+
+import Figure from '../../components/story/Figure.astro';
+import PlotlyChart from '../../components/story/PlotlyChart.tsx';
+import domer from '../../data/sleep-cycles/domer.json';
+import cottrell from '../../data/sleep-cycles/george-cottrell.json';
+import theo from '../../data/sleep-cycles/theo.json';
+import countrysid from '../../data/sleep-cycles/countrysid.json';
+
+{/* Titles sit on the <Figure>, so the charts only need room for the hour labels and source line */}
+export const chartMargin = { l: 0, r: 0, t: 10, b: 60 };
+
+In 2011, Swiss Engineer Stefan Thomas tried to locate Satoshi Nakamoto by calculating the timing of his forum posts. He discovered that Bitcoin’s inventor was almost completely inactive between the hours of GMT 11pm and 5am.
+
+This absence, interpreted as sleep and used alongside other indicators, suggested that ‘Satoshi Nakamoto’ was *probably* a British man cosplaying as a Japanese man. The Superdry of cryptography.
+
+Out of curiosity (and maybe desperation), I tried this approach on Polymarket by writing a simple script to extrapolate probable timezones from transactions volumes. Here are the inconclusive—but not uninteresting—results:
+
+<Figure size="wide" title={domer.layout.title.text} dek={domer.layout.title.subtitle.text}>
+	<PlotlyChart client:visible figure={domer} margin={chartMargin} matchSite label="Domer's Polymarket transactions by hour of the day, UTC" />
+</Figure>
+
+Baseline. [Domer/ImJustKen](https://www.cbsnews.com/news/who-is-making-bets-on-polymarket-60-minutes/) is a top Polymarket trader known for his geopolitical takes. He is dormant between UTC 8 - 12 am. If we assume that 12 - 6 am is the normal bedtime, this gives us an offset of -8. UTC-8 is the US West Coast—not too far off from Domer’s home in [Las Vegas, UTC-7](https://www.dlnews.com/articles/markets/meet-the-most-prolific-bettor-on-polymarket/).
+
+However, there are other gaps in his schedule which you can’t really explain. Does he drive out to Applebees for dinner around 8pm? Does he break for lunch around 2?
+
+Verdict: *6/10.*
+
+<Figure size="wide" title={cottrell.layout.title.text} dek={cottrell.layout.title.subtitle.text}>
+	<PlotlyChart client:visible figure={cottrell} margin={chartMargin} matchSite label="George Cottrell's Polymarket transactions by hour of the day, UTC" />
+</Figure>
+
+Far-right financier George Cottrell is Nigel Farage’s moneyman. However, his Polymarket wallet—leaked to the [Financial Times](https://www.ft.com/content/4fccf8b5-5e32-4322-9435-d996a0273dff?syn-25a6b1a6=1)—is most active between 10 am - 2 pm. The possible locations matching this sleep cycle are Hawaii, Fiji, Alaska, US West Coast, US Southwest, New Zealand and Tahiti.
+
+Why is he trading at these hours? Two plausible reason: 1) The quality of the dataset is bad because he makes a few huge trades instead of many small ones 2) Cottrell is a [frontman for Billionaire Tony Bloom](https://www.theguardian.com/football/2026/jan/23/billionaire-gambler-tony-bloom-denies-owing-millions-george-cottrell)—who runs a quantitative sports gambling syndicate unconstrained by the human need for sleep.
+
+Verdict: 0/10. Dataset quality too poor, inconclusive results.
+
+<Figure size="wide" title={theo.layout.title.text} dek={theo.layout.title.subtitle.text}>
+	<PlotlyChart client:visible figure={theo} margin={chartMargin} matchSite label="Theo's Polymarket transactions by hour of the day, UTC" />
+</Figure>
+
+‘Theo’ coordinated eight different wallets and placed more than $30 million on Trump winning the 2024 election. [The WSJ has confirmed that he is French](https://www.wsj.com/finance/how-the-trump-whale-correctly-called-the-election-cb7eef1d?eafs_enabled=false). Although his trading activity never dips below the 20% threshold I used to flag sleeping hours, there is a discernible decline between UTC 22:00 and UTC 04:00.
+
+He’s either in the Azores or just goes to bed rather early.
+
+Verdict: 4/10. *C'est possible.*
+
+<Figure size="wide" title={countrysid.layout.title.text} dek={countrysid.layout.title.subtitle.text}>
+	<PlotlyChart client:visible figure={countrysid} margin={chartMargin} matchSite label="CountrySid's Polymarket transactions by hour of the day, UTC" />
+</Figure>
+
+Alleged Chinese arbitrage trader used as a success story by various grifters to sell Polymarket courses. However, his bedtime of UTC 16:00 - 21:00 lands squarely on 12am - 6am in China, making his location highly possible, even if his trading strategy is difficult to emulate.
+
+Verdict: 非常可能。
+
+**Conclusion:** As you can probably tell, this method is implausible at best. It works if your quarry trades at a high volume, does not automate their work, does not move countries and takes care to go to bed consistently because he/she believes in self-care.
+
+Unfortunately, these qualities are short supply amongst people who use crypto to gamble on airstrikes. You’ll also have a hard time convincing readers to get on board with your conclusions because the counterargument is always ‘what if they’re a nightowl?’.
+
+Nonetheless, if you’re interested in using the method to hunt for Russian misinformation bots or Cambodian scam compounds, check it out at: https://github.com/pannjie/zzz/tree/main.
+
+\*\*Does not factor for daylight savings. Too tired.
