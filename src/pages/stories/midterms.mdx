@@ -1,0 +1,82 @@
+---
+layout: ../../layouts/StoryLayout.astro
+title: Are Prediction Markets Losing Their Edge?
+byline: By PJ
+pubDate: 2026-11-15
+description: Prediction markets were supposed to beat political polling.
+# Optional:
+# pubDate: 2026-11-15
+# hero: midterms/hero.jpg          # a file inside src/assets/stories/
+# heroAlt: Describe the hero image
+---
+
+import Figure from '../../components/story/Figure.astro';
+import StoryImage from '../../components/story/StoryImage.astro';
+import PlotlyChart from '../../components/story/PlotlyChart.tsx';
+import senateMap from '../../data/midterms/senate_map.json';
+import senateVolumes from '../../data/midterms/senate_volumes.json';
+
+
+{/*
+  Write paragraphs as plain text, separated by a blank line; use ## for section headings.
+  Links: [words to link](https://…)
+
+  Photo:        import it below the other imports, then
+                <Figure caption="Caption. Credit: …"><StoryImage src={photo} alt="What it shows" /></Figure>
+  Photo row:    <Figure layout="gallery"> … </Figure>
+  Wider:        <Figure size="wide"> … </Figure>
+  Hosted chart: see Embed in build-to-rent.mdx or kopdes.mdx
+  Plotly chart: see PlotlyChart in research/sleep-cycles.mdx
+*/}
+
+After the US midterms ended with a historic blue wave, a different battle ignited on X between pollsters and prediction markets.
+
+Tarek Mansour, CEO of Kalshi, [declared victory for 'the markets'](https://x.com/mansourtarek_/status/2118137937707913265) by citing his platform's higher accuracy in forecasting House races.
+
+He also framed the 'win' as a triumph of 'the people' over elites who cannot "see and feel what the everyday man, on the ground, sees and feels."
+
+Veteran forecaster Nate Silver [swiftly fired back](https://x.com/NateSilver538/status/2118151715719401663) by calling Kalshi's victory 'stolen valor'. "The better election models were more confident about the outcome than the markets and got there more quickly," he wrote.
+
+The truth sits somewhere in the middle.
+
+{/* Drawn as designed in the notebook (own title, subtitle, margins), in the site font with site-sized titles */}
+<Figure size="wide">
+	<PlotlyChart client:visible figure={senateMap} siteFont label="Who had the most accurate predictions on the night before the US midterms" />
+</Figure>
+
+While Mansour was right to claim that Kalshi was more accurate than many polls in predicting midterm House results, his platform lagged behind both [Nate Silver's FLIPR model](https://www.natesilver.net/p/nate-silver-2026-midterm-election-senate-model) and Polymarket when it comes to Senate outcomes.
+
+On the night before the election, Kalshi was not the most accurate forecaster for any of the 33 Senate races. When placed head-to-head against its archrival Polymarket, it was more accurate in just 12 races compared to Polymarket's 19.
+
+Although it did better in forecasting gubernatorial and House races, Kalshi nevertheless lagged behind leading pollsters when it came to predicting the outcome with confidence before the polls opened.
+
+## Liquidity is all you need
+
+This outcome puts a serious dent in the claim that prediction markets are unassailable 'truth machines'. [Bloomberg](https://www.bloomberg.com/news/articles/2026-11-05/kalshi-and-polymarket-get-a-passing-grade-on-the-us-midterm-elections) gave the platforms a 'passing grade' for their midterm forecasting.
+
+It also challenges some of the longstanding assumptions about prediction markets.
+
+[Previous studies](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5331995) of such markets suggested that accuracy is created by liquidity: the higher the relative volume of transactions, the more likely they are to produce a more accurate result.
+
+However, Kalshi failed to decisively outpredict Polymarket, despite capturing approximately 84.5% of the total trading volume in Senate races. The difference of 422 million shares seems to have made very little impact on its forecasting ability.
+
+<Figure size="wide">
+	<PlotlyChart client:visible figure={senateVolumes} siteFont label="Kalshi dominated volume, but it lagged in accuracy" />
+</Figure>
+
+In Minnesota's Senate race, it trailed Polymarket in forecasting by around 2.5–3 percentage points despite having 10 times the volume of shares.
+
+The exact reasons for this discrepancy are up for debate. Joachim Klement, a managing director for investment bank Panmure Liberum, [wrote in the Financial Times](https://www.ft.com/content/d41df5d6-bde3-4887-a233-5c0f26a7defd) that 'whales' could shift the odds by betting on their 'preferred outcome'.
+
+As a result, the markets reflect the views of a few 'wealthy punters' rather than a crowdsourced range of opinions, thus turning the 'truth machine' into an op-ed.
+
+Domer, a prominent geopolitics trader from Las Vegas, blamed the results on an excess of emotion from politically biased users.
+
+“There was a lot of resistance to just accepting the reality that Texas was going to go blue,” he told Bloomberg.
+
+Users of either Kalshi or Polymarket are unlikely to be fazed, but the results should call into question their widespread use as a data source by journalists, analysts and the finance industry. Bloomberg, CNN and the Wall Street Journal offer prediction market odds--but perhaps it's time to take a closer look at their limitations.
+
+
+
+
+

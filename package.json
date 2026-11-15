@@ -23,6 +23,7 @@
     "lightgallery": "^3.0.0",
     "mapbox-gl": "^3.33.0",
     "plotly.js-basic-dist-min": "^3.7.0",
+    "plotly.js-geo-dist-min": "^3.7.0",
     "preact": "^11.0.1",
     "sharp": "^0.35.0"
   },

@@ -324,3 +324,13 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+/* Plotly charts with a dropdown inside the title (PlotlyChart.tsx): the hover highlight is drawn on the
+   dropdown's outline instead of Plotly's own, differently sized button background */
+.inline-menu .updatemenu-header .updatemenu-item-rect {
+	fill-opacity: 0 !important;
+}
+.inline-menu .updatemenu-dropdown-button-group .updatemenu-item-rect {
+	x: var(--inline-menu-x);
+	width: var(--inline-menu-width);
+}
