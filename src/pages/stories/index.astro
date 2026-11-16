@@ -5,7 +5,7 @@ import PentagramGrid from '../../components/PentagramGrid.astro';
 import { SITE_TITLE } from '../../consts';
 import cinemaHero from '../../assets/stories/cinema/battersea1.jpg';
 import chronicleLaunchPoster from '../../assets/stories/chronicle/launch-poster.jpg';
-import btrSkyline from '../../assets/stories/btr/elephant_castle.jpg';
+import btrPoster from '../../assets/stories/btr/hero-poster.jpg';
 import kopdes from '../../assets/stories/kopdes/kopdes.jpeg'
 import midterms from '../../assets/stories/midterms/Screenshot 2026-11-15 at 19.27.01.png';
 
@@ -33,7 +33,11 @@ const stories = [
 		label: 'Property',
 		description: 'Pet spas, private cinemas and in-house plumbers: who London’s new rental towers really serve.',
 		href: '/stories/build-to-rent/',
-		image: btrSkyline,
+		video: {
+			webm: '/media/stories/btr-hero.webm',
+			mp4: '/media/stories/btr-hero.mp4',
+			poster: btrPoster,
+		},
 	},
 	{
 		title: 'Indonesia’s Risky $23bn Bet On The Village Economy',

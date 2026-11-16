@@ -44,6 +44,33 @@ function siteStyled({ data, layout }: PlotlyFigure): PlotlyFigure {
 
 // Same look as the site's figure headings (Figure.astro h3 at full width): Host Grotesk, 30.4px, weight 500
 const headingInk = '#0f1219';
+const siteTitleSize = 30.4;
+
+/** A legend placed as a fraction of the notebook's figure width ("container") lands somewhere else at any other
+    width; returns its distance from the left edge in px at the notebook's size, to keep it there */
+function legendOffset(layout: Record<string, any>): number | undefined {
+	const legend = layout.legend;
+	return legend?.xref === 'container' && typeof legend.x === 'number' && layout.width ? legend.x * layout.width : undefined;
+}
+
+/** Full-size title if it fits on the chart, otherwise shrunk until it does (e.g. a narrow offset figure);
+    also keeps the legend the same distance from the left edge as in the notebook */
+async function fitTitle(gd: any, Plotly: any, fullSize: number, legendPx?: number) {
+	if (legendPx !== undefined) await Plotly.relayout(gd, { 'legend.x': legendPx / gd._fullLayout.width });
+	await document.fonts.ready; // measure in the real font, not the fallback
+	let size = fullSize;
+	for (let i = 0; i < 4; i++) {
+		await Plotly.relayout(gd, { 'title.font.size': size });
+		const svg = gd.querySelector('.main-svg');
+		const title = gd.querySelector('.g-gtitle .gtitle');
+		if (!svg || !title) return;
+		const edge = svg.getBoundingClientRect();
+		const box = title.getBoundingClientRect();
+		const room = edge.right - box.left - 8;
+		if (box.width <= room) return;
+		size = Math.floor(size * (room / box.width) * 0.98 * 10) / 10;
+	}
+}
 
 function withSiteFont({ data, layout }: PlotlyFigure): PlotlyFigure {
 	const title = layout.title ?? {};
@@ -56,7 +83,7 @@ function withSiteFont({ data, layout }: PlotlyFigure): PlotlyFigure {
 				...title,
 				// <b> tags would override the heading weight
 				text: typeof title.text === 'string' ? title.text.replace(/<\/?b>/g, '') : title.text,
-				font: { ...title.font, family: font, size: 30.4, weight: 500, color: headingInk },
+				font: { ...title.font, family: font, size: siteTitleSize, weight: 500, color: headingInk },
 			},
 		},
 	};
@@ -221,14 +248,21 @@ export default function PlotlyChart({ figure, label, height, margin, matchSite =
 			const { figure: split, menu } = matchSite ? { figure: styled, menu: undefined } : splitTitleForMenu(styled);
 			const { data, layout } = split;
 			// Drop any fixed size saved by the notebook, so the chart fills the column and the box below
+			const legendPx = siteFont ? legendOffset(layout) : undefined;
 			const { width: _width, height: _height, ...sized } = layout;
+			if (legendPx !== undefined) sized.legend = { ...sized.legend, x: legendPx / el.clientWidth };
 			const finalLayout = margin ? { ...sized, margin: { ...sized.margin, ...margin } } : sized;
 			// Same config as the notebook's write_html output
 			Plotly!.newPlot(el, data, finalLayout, { responsive: true, displayModeBar: false }).then((gd: any) => {
-				if (!menu || cancelled) return;
+				const fit = menu
+					? () => placeInlineMenu(gd, Plotly, menu)
+					: siteFont
+						? () => fitTitle(gd, Plotly, siteTitleSize, legendPx)
+						: null;
+				if (!fit || cancelled) return;
 				// One placement at a time, so a slower earlier one can't overwrite a newer one
 				let queue = Promise.resolve();
-				const place = () => (queue = queue.then(() => placeInlineMenu(gd, Plotly, menu)).catch(() => {}));
+				const place = () => (queue = queue.then(fit).catch(() => {}));
 				place();
 				// Re-measure when the column width changes, once Plotly's own resize (debounced 100ms) has redrawn
 				let timer: ReturnType<typeof setTimeout>;
@@ -243,7 +277,7 @@ export default function PlotlyChart({ figure, label, height, margin, matchSite =
 
 				// Plotly's hover highlight is the size of its own button, not the outline (hidden via .inline-menu in
 				// global.css); fill the outline instead, in the same colour Plotly uses
-				if (menu.outline >= 0) {
+				if (menu && menu.outline >= 0) {
 					el.classList.add('inline-menu');
 					const highlight = (on: boolean) => {
 						const path = el.querySelector<SVGPathElement>(`.shapelayer path[data-index="${menu.outline}"]`);

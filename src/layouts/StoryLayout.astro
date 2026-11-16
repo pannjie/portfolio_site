@@ -166,9 +166,51 @@ const heroPoster = heroVideo && heroImage ? await getImage({ src: heroImage, wid
 		--w: var(--medium);
 	}
 
+	/* Offset figures float half in the column, half out in the margin (as far as wide figures reach),
+	   with the text wrapping around them */
+	.story-body :global(.figure--offset) {
+		--overhang: calc((var(--wide) - 100%) / 2);
+
+		width: calc(45% + var(--overhang));
+		margin-top: 0.4rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.story-body :global(.figure--offset-right) {
+		float: right;
+		margin-right: calc(-1 * var(--overhang));
+		margin-left: 2.5rem;
+	}
+
+	.story-body :global(.figure--offset-left) {
+		float: left;
+		margin-left: calc(-1 * var(--overhang));
+		margin-right: 2.5rem;
+	}
+
+	/* Too narrow to sit beside the text: full width instead */
+	@media (max-width: 1279px) {
+		.story-body :global(.figure--offset) {
+			float: none;
+			width: var(--wide);
+			margin: 3rem 0 3rem calc((100% - var(--wide)) / 2);
+		}
+	}
+
+	/* Headings and full figures start below any offset figure */
+	.story-body > :global(h2),
+	.story-body :global(.figure:not(.figure--offset)) {
+		clear: both;
+	}
+
 	@media (max-width: 760px) {
 		.story-body {
 			margin-top: 2.5rem;
+		}
+
+		.story-body :global(.figure--offset) {
+			width: 100%;
+			margin: 3rem 0;
 		}
 
 		.story-body :global(.figure--wide),

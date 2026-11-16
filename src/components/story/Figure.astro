@@ -1,7 +1,10 @@
 ---
 interface Props {
-	/** wide: charts and map; medium: photos; column: same width as the text */
-	size?: 'wide' | 'medium' | 'column';
+	/** wide: charts and map; medium: photos; column: same width as the text;
+	    offset: narrow, pushed out into the margin with the text wrapping around it */
+	size?: 'wide' | 'medium' | 'column' | 'offset';
+	/** Which side an offset figure sits on (default right) */
+	side?: 'left' | 'right';
 	/** single: one item; pair: two side by side; trio: grid of up to three per row;
 	    gallery: photos in a justified row, all the same height without cropping */
 	layout?: 'single' | 'pair' | 'trio' | 'gallery';
@@ -10,10 +13,10 @@ interface Props {
 	caption?: string;
 }
 
-const { size = 'medium', layout = 'single', title, dek, caption } = Astro.props;
+const { size = 'medium', side = 'right', layout = 'single', title, dek, caption } = Astro.props;
 ---
 
-<figure class:list={['figure', `figure--${size}`]}>
+<figure class:list={['figure', `figure--${size}`, size === 'offset' && `figure--offset-${side}`]}>
 	{
 		(title || dek) && (
 			<div class="figure-head">
